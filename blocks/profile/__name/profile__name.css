@@ -1,0 +1,15 @@
+.profile__name {
+  margin: 0;
+
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 56px;
+  /* or 255% */
+
+  text-align: center;
+
+  color: #FFFFFF;
+
+}
