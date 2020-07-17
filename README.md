@@ -1,5 +1,12 @@
 # Project 4: Around The U.S.
 
+## My first project using JavaScript
+
+### Description
+
+* Responsive Website designed with Mobile first approach
+* Page structure with BEM methodology
+
 ### Overview
 
 * Figma
@@ -11,6 +18,4 @@
 
 **Images**
 
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
-
-Have fun with JavaScript!
+Exported directly from Figma and optimized [here](https://tinypng.com/).
