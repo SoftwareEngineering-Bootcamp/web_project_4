@@ -1,0 +1,18 @@
+@import url('./__avatar/profile__avatar.css');
+
+@import url('./__photo/profile__photo.css');
+
+@import url('./__info/profile__info.css');
+
+@import url('./__name/profile__name.css');
+
+@import url('./__description/profile__description.css');
+
+
+
+.profile {
+  width: 90%;
+  min-height: 286px;
+  margin: 42px auto 0;
+  background-color: burlywood;
+}

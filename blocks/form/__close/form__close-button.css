@@ -1,0 +1,12 @@
+.form__close-button {
+  position: fixed;
+  left: 58vw;
+  top: 50vh;
+  margin: 0;
+  padding: 0;
+  background: red;
+  cursor: pointer;
+
+
+  color: #FFFFFF;
+}

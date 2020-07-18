@@ -4,5 +4,8 @@
   margin: 0 auto;
   padding: 0;
 
+  font-family: 'Inter', 'Arial', sans-serif;
+  text-rendering: optimizeLegibility;
+
   background: #000000;
 }

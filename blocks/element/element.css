@@ -1,0 +1,11 @@
+@import url('./__item/element__item.css');
+
+@import url('./__photo/element__photo.css');
+
+.element {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
