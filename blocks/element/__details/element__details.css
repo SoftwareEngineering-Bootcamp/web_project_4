@@ -1,0 +1,10 @@
+.element__details {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  border-radius: 0 0 10px 10px;
+  background: #ffffff;
+}
