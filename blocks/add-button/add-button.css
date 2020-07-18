@@ -8,7 +8,5 @@
   box-sizing: border-box;
   border-radius: 2px;
 
-  background-image: url('../../images/add-icon.png');
-  background-position: center;
-  background-repeat: no-repeat;
+  background: url('../../images/add-icon.svg') center no-repeat;
 }
