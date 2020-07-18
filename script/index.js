@@ -1,7 +1,6 @@
-//hold profile edit button
+/*JS code for profile edit*/
 let editProfile = document.querySelector('.profile__edit');
 
-//hold close button class
 let closeEditProfile = document.querySelector('.form__close-button');
 
 let formPopup = document.querySelector('.form');
@@ -26,46 +25,41 @@ formEdit.addEventListener('submit', function(e) {
   name.textContent = nameInput.value;
   description.textContent = descriptionInput.value;
 
-  //close the edit form
+  // call the same function to close the edit form
   toggleForm();
+  /* End of JS code for profile edit */
 })
 
 
+/* JS Code for add button */
 
-//let content = document.querySelector('.content');
-
-
-/*let profileInfo = container.querySelector('.profile__info');
+let element = document.querySelector('.element__details');
 
 let addButton = container.querySelector('.add-button');
-
-//to hold each element added (photo + place name)
-let photoContainer = container.querySelector('.element__container');
-
-
-/* function to close the form */
-
-
-/* function to edit user profile */
-
-
-/* function to add elements to the gallery
+/* function to add elements to the gallery */
 function addPhoto() {
   let photo = document.querySelector('.element__photo');
-  let place = document.querySelector('.element__place');
+  let place = document.querySelector('.element__name');
 
   photoContainer.insertAdjacentHTML('beforend', `
-    <div class="element__container">
-      <img src="photo.value" class="element__photo">
-      <p class="element__place">${place.value}</p>
-      <button class="like-button"><button>
-    </div>
-  `);
+    <img src="#" alt="" class="element__photo">
+    <div class="element__details">
+      <h2 class="element__name"></h2>
+      <button class="element__like"></button>
+    </div>`)
+  ;
 
-  /* reset fields to be able to add another picture without having to delete the previous one
+  /* reset fields to be able to add another picture without having to delete the previous one */
   photo.value = "";
   place.value = "";
 }
 
-addButton.addEventListener('click', addPhoto);*/
+addButton.addEventListener('click', addPhoto);
+
+
+
+
+
+
+
 

@@ -8,9 +8,11 @@
 
 @import url('./__description/profile__description.css');
 
+
+
 .profile {
-  width: 282px;
-  height: 286px;
+  width: 90%;
+  min-height: 286px;
   margin: 42px auto 0;
   background-color: burlywood;
 }
