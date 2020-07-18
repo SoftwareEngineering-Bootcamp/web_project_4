@@ -17,16 +17,32 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img src="./images/profile_avatar.png" alt="profile-pic" class="profile__avatar">
-        <div class="profile__info">
-          <h2 class="profile__name" placeholder="Name">Jacques Cousteau</h2>
-          <div class="edit-icon"></div>
-          <p class="profile__description">Explorer</p>
+        <div class="profile__avatar">
+          <img src="./images/profile_avatar.png" alt="profile-pic" class="profile__photo">
+          <ul class="profile__info">
+            <li class="profile__info_item">
+              <h1 class="profile__name">Jacques Cousteau</h1>
+              <div class="profile__edit edit-icon"></div>
+            </li>
+            <li class="profile__info_item">
+              <span class="profile__description">Explorer</span>
+            </li>
+          </ul>
         </div>
-        <div class="add-button"></div>
+        <div class="form">
+          <div class="form__container">
+            <h2 class="form__title">Edit Profile</h2>
+            <form action="#" class="form__edit">
+              <input type="text" class="form__input form__input-name" placeholder="Name">
+              <input type="text" class="form__input form__input-description" placeholder="About Me">
+              <button type="submit" class="form__submit">Save</button>
+            </form>
+          </div>
+          <div class="form__close-button">&times;</div>
+        </div>
       </section>
     </main>
     <footer class="footer"></footer>
-    <script src="./script/script.js"></script>
+    <script src="./script/index.js"></script>
   </body>
 </html>
