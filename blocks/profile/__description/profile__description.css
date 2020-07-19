@@ -10,3 +10,10 @@
 
   color: #FFFFFF;
 }
+
+@media screen and (min-width: 1024px) {
+  .profile__description {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

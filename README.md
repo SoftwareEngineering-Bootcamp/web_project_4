@@ -4,8 +4,16 @@
 
 ### Description
 
-* Responsive Website designed with Mobile first approach
-* Page structure with BEM methodology
+* Adaptive design with Mobile first approach.
+* Page structured with BEM methodology.
+* Technologies: **_HTML_**, **_CSS_** and **_JavaScript_**.
+* **CSS Properties:** _flexbox_, _grid container_, _media queries_.
+
+### Need Attention to finalize project
+* Fix popup of form when mouse over edit button.
+* Fix JS code for add-button when mouse over.
+* Use JS to save user interactions on add-button.
+* Transition and animation effect on Edit Form and UI Kit
 
 ### Overview
 

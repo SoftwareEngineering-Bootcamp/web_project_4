@@ -13,5 +13,17 @@
   margin: 0;
   padding: 0;
 
+  display: flex;
+  flex-direction: column;
+
   list-style: none;
+}
+
+@media screen and (min-width: 1024px) {
+  .element {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px 18px;
+  }
 }

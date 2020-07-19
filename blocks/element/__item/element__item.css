@@ -1,11 +1,19 @@
 .element__item {
-  width: 100%;
+  width: 282px;
+  height: 361px;
   margin: 0 0 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .element__item:last-child {
   margin: 0;
+}
+
+@media screen and (min-width: 1024px) {
+  .element__item {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
 }
