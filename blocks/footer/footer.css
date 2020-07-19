@@ -1,0 +1,13 @@
+@import url('./__item/footer__item.css');
+
+.footer {
+  width: 90%;
+  margin: 48px auto 36px;
+}
+
+@media screen and (min-width: 768px) {
+  .footer {
+    width: 318px;
+    height: 18px;
+  }
+}
