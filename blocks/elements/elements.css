@@ -4,4 +4,12 @@
   width: 90%;
   margin: 36px auto 0;
   padding: 0;
+  background-color: burlywood;
+}
+
+@media screen and (min-width: 1024px) {
+  .elements {
+    width: 80%;
+    margin: 50px auto 0;
+  }
 }

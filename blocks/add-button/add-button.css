@@ -10,3 +10,11 @@
 
   background: url('../../images/add-icon.svg') center no-repeat;
 }
+
+
+@media screen and (min-width: 1024px) {
+  .add-button {
+    width: 150px;
+    margin: 35px 0;
+  }
+}
