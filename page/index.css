@@ -8,7 +8,11 @@
 
 @import url('../blocks/logo/logo.css');
 
+@import url('../blocks/content/content.css');
+
 @import url('../blocks/profile/profile.css');
+
+@import url('../blocks/overlay/overlay.css');
 
 @import url('../blocks/form/form.css');
 

@@ -12,17 +12,15 @@
 
 
 .profile {
-  width: 90%;
+  width: 100%;
   max-height: 286px;
   padding: 0;
-  margin: 42px auto 0;
-  background-color: burlywood;
+  margin: 42px 0 0;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
   .profile {
-    width: 80%;
-    margin: 40px auto 0;
+    margin-top: 40px;
     display: flex;
     justify-content: space-between;
   }
