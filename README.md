@@ -1,6 +1,7 @@
 # Project 4: Around The U.S.
 
 ## My first project using JavaScript
+* [My project is accessible here](https://abra-sena.github.io/web_project_4/)
 
 ### Description
 
