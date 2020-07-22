@@ -1,15 +1,19 @@
 @import url('../element/element.css');
 
 .elements {
-  width: 90%;
+  width: 100%;
   margin: 36px auto 0;
   padding: 0;
-  background-color: burlywood;
+}
+
+@media screen and (min-width: 768px) {
+  .elements {
+    margin: 40px auto 0;
+  }
 }
 
 @media screen and (min-width: 1024px) {
   .elements {
-    width: 80%;
     margin: 50px auto 0;
   }
 }

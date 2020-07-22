@@ -7,14 +7,17 @@
   cursor: pointer;
 }
 
+.profile__edit:hover {
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
 .edit-icon {
   width: 18px;
   height: 18px;
 
-  background-image: url('../../../images/edit-icon.svg');
-  background-position: center;
-  background-repeat: no-repeat;
+  background: url('../../../images/edit-icon.svg') center no-repeat;
 }
+
 
 @media screen and (min-width: 1024px) {
   .edit-icon {
