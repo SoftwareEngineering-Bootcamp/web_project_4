@@ -9,11 +9,10 @@
 * Technologies: **_HTML_**, **_CSS_** and **_JavaScript_**.
 * **CSS Properties:** _flexbox_, _grid container_, _media queries_.
 
-### Need Attention to finalize project
-* Fix popup of form when mouse over edit button.
-* Fix JS code for add-button when mouse over.
-* Use JS to save user interactions on add-button.
-* Transition and animation effect on Edit Form and UI Kit
+### Submission Notes
+* Project looks like brief on Figma.
+* Popup form fixed when mouse over edit button with overlay effect on hole page.
+* Transition and animation effect on Edit Form conform to UI Kit.
 
 ### Overview
 
