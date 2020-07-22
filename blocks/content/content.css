@@ -1,0 +1,13 @@
+.content {
+  width: 90%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+
+@media screen and (min-width: 1024px) {
+  .content {
+    width: 80%;
+  }
+
+}

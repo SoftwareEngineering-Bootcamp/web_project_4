@@ -5,21 +5,8 @@
   align-self: center;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
   .profile__avatar {
     flex-direction: row;
   }
 }
-/*.add-button {
-  width: 282px;
-  height: 50px;
-  margin: 36px auto 0;
-  border: 2px solid #FFFFFF;
-  box-sizing: border-box;
-  border-radius: 2px;
-
-  background-image: url('../../../images/add-icon.png');
-  background-position: center;
-  background-repeat: no-repeat;
-}
-*/
