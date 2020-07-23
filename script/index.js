@@ -1,44 +1,39 @@
 /*JS code for profile edit*/
 let editProfile = document.querySelector('.profile__edit');
 let closeEditProfile = document.querySelector('.form__close-button');
-let formPopup = document.querySelector('.form');
-let formEdit = document.querySelector('.form__edit');
-let nameInput = document.querySelector('.form__input-name');
-let descriptionInput = document.querySelector('.form__input-description');
-let name = document.querySelector('.profile__name');
-let description = document.querySelector('.profile__description');
-let overlay = document.querySelector('.overlay');
+let formEdit = document.querySelector('.popup__form');
+let nameInput = document.querySelector('.form__input_type_name');
+let descriptionInput = document.querySelector('.form__input_type_description');
+let profileName = document.querySelector('.profile__name');
+let profileDescription = document.querySelector('.profile__description');
+let overlay = document.querySelector('.popup');
 
-/* function to apply overlay effect to the page when editing profile */
-function toggleOverlay() {
-  overlay.classList.toggle('overlay__open')
-}
 
 /* function to open profile edit form */
 function toggleForm() {
-  formPopup.classList.toggle('form__open');
-  nameInput.value = name.textContent;
-  descriptionInput.value = description.textContent;
+  overlay.classList.toggle('popup_open');
+
+  //copy profile-name and profile-description into form fields
+  nameInput.value = profileName.textContent;
+  descriptionInput.value = profileDescription.textContent;
 }
 
-editProfile.addEventListener('click', toggleOverlay);
+/**
+ * function formSubmitHandler(e) {
+  e.preventDefault();
+}
+ */
 
 editProfile.addEventListener('click', toggleForm);
 closeEditProfile.addEventListener('click', toggleForm);
 
-closeEditProfile.addEventListener('click', toggleOverlay);
-
 formEdit.addEventListener('submit', function(e) {
-  e.preventDefault();
-
-  name.textContent = nameInput.value;
-  description.textContent = descriptionInput.value;
+  profileName.textContent = nameInput.value;
+  profileDescription.textContent = descriptionInput.value;
 
   // call the same function used to open the form, to close it
   toggleForm();
 
-  //hide overlay effect after form is closed
-  toggleOverlay();
   /* End of JS code for profile edit */
 })
 

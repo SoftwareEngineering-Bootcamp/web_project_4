@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,78 +12,59 @@
 
   <body class="body">
     <header class="header">
-      <img src="./images/header_logo.png" alt="header-logo" class="logo">
-      <div class="header__line"></div>
+      <img src="./images/header_logo.svg" alt="header-logo" class="logo">
     </header>
     <main class="content">
       <section class="profile">
         <div class="profile__avatar">
           <img src="./images/profile_avatar.png" alt="profile-pic" class="profile__photo">
-          <ul class="profile__info">
-            <li class="profile__info_item">
-              <h1 class="profile__name">Jacques Cousteau</h1>
-              <div class="profile__edit edit-icon"></div>
-            </li>
-            <li class="profile__info_item">
-              <span class="profile__description">Explorer</span>
-            </li>
-          </ul>
-        </div>
-        <div class="overlay"></div>
-        <div class="form">
-          <div class="form__close-button">
-            <span class="close">&times;</span>
-          </div>
-          <div class="form__container">
-            <h2 class="form__title">Edit Profile</h2>
-            <form class="form__edit">
-              <input type="text" class="form__input form__input-name" placeholder="Name">
-              <input type="text" class="form__input form__input-description" placeholder="About Me">
-              <button type="submit" class="form__submit">Save</button>
-            </form>
+          <div class="profile__info">
+            <h1 class="profile__name">Jacques Cousteau</h1>
+            <button type="button" class="profile__edit"></button>
+            <p class="profile__description">Explorer</p>
           </div>
         </div>
-        <div class="add-button"></div>
+        <button class="add-button"></button>
       </section>
 
       <section class="elements">
-        <ul class="element">
-          <li class="element__item">
+        <ul class="elements__list">
+          <li class="element">
             <img src="./images/element_yosemite.png" alt="yosemite" class="element__photo">
             <div class="element__details">
               <h2 class="element__name">Yosemite Valley</h2>
               <button class="element__like"></button>
             </div>
           </li>
-          <li class="element__item">
+          <li class="element">
             <img src="./images/element_lake-louise.png" alt="lake" class="element__photo">
             <div class="element__details">
               <h2 class="element__name">Lake Louise</h2>
               <button class="element__like"></button>
             </div>
           </li>
-          <li class="element__item">
+          <li class="element">
             <img src="./images/element_bald-mountains.png" alt="bald-mountains" class="element__photo">
             <div class="element__details">
               <h2 class="element__name">Bald Mountains</h2>
               <button class="element__like"></button>
             </div>
           </li>
-          <li class="element__item">
+          <li class="element">
             <img src="./images/element_latemar.png" alt="latemar" class="element__photo">
             <div class="element__details">
               <h2 class="element__name">Latemar</h2>
               <button class="element__like"></button>
             </div>
           </li>
-          <li class="element__item">
+          <li class="element">
             <img src="./images/element_vanoise.png" alt="vanoise" class="element__photo">
             <div class="element__details">
               <h2 class="element__name">Vanoise National Park</h2>
               <button class="element__like"></button>
             </div>
           </li>
-          <li class="element__item">
+          <li class="element">
             <img src="./images/element_lago-di-braies.png" alt="lago-di-braies" class="element__photo">
             <div class="element__details">
               <h2 class="element__name">Lago di Braies</h2>
@@ -94,8 +75,21 @@
       </section>
     </main>
     <footer class="footer">
-      <div class="footer__item">© 2020 Around The U.S.</div>
+      <p class="footer__item">© 2020 Around The U.S.</p>
     </footer>
+    <div class="popup">
+      <div class="form">
+        <form name="profile-edit-form" class="popup__form">
+          <h2 class="form__title">Edit Profile</h2>
+          <fieldset class="form__field">
+            <input type="text" name="profile-name" class="form__input form__input_type_name" placeholder="Name" required>
+            <input type="text" name="profile-description" class="form__input form__input_type_description" placeholder="About Me" required>
+          </fieldset>
+          <button type="submit" class="form__submit">Save</button>
+          <button type="button" class="form__close-button"></button>
+        </form>
+      </div>
+    </div>
     <script src="./script/index.js"></script>
   </body>
 </html>
