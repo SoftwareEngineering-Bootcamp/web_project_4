@@ -12,18 +12,22 @@ let overlay = document.querySelector('.popup');
 /* function to open profile edit form */
 function toggleForm() {
   overlay.classList.toggle('popup_open');
+
+  //copy profile-name and profile-description into form fields
   nameInput.value = profileName.textContent;
   descriptionInput.value = profileDescription.textContent;
 }
 
-function formSubmitHandler(e) {
+/**
+ * function formSubmitHandler(e) {
   e.preventDefault();
 }
+ */
 
 editProfile.addEventListener('click', toggleForm);
 closeEditProfile.addEventListener('click', toggleForm);
 
-formEdit.addEventListener('submit', formSubmitHandler() {
+formEdit.addEventListener('submit', function(e) {
   profileName.textContent = nameInput.value;
   profileDescription.textContent = descriptionInput.value;
 
