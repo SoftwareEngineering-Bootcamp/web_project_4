@@ -1,5 +1,5 @@
 .profile__edit {
-  display: inline-block;
+  display: flex;
   width: 18px;
   height: 18px;
   margin: 20px 0 0 12px;
