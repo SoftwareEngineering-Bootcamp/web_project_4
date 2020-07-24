@@ -1,10 +1,5 @@
 .element__photo {
-  min-width: 282px;
-  height: 282px;
-}
-
-@media screen and (min-width: 768px) {
-  .element__photo {
-    width: 100%;
-  }
+  width: 282px;
+  height: 100%;
+  object-fit: cover;
 }

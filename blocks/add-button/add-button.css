@@ -14,7 +14,14 @@
 
 @media screen and (min-width: 768px) {
   .add-button {
+    width: 80px;
+    margin: 35px 0 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .add-button {
     width: 150px;
-    margin: 35px 0;
+    margin: 35px 0 0;
   }
 }

@@ -14,28 +14,27 @@ function toggleForm() {
   overlay.classList.toggle('popup_open');
 
   //copy profile-name and profile-description into form fields
-  nameInput.value = profileName.textContent;
-  descriptionInput.value = profileDescription.textContent;
+  if('popup_open') {
+    nameInput.value = profileName.textContent;
+    descriptionInput.value = profileDescription.textContent;
+  }
 }
 
-/**
- * function formSubmitHandler(e) {
-  e.preventDefault();
-}
- */
+function formSubmitHandler(event) {
+  event.preventDefault();
 
-editProfile.addEventListener('click', toggleForm);
-closeEditProfile.addEventListener('click', toggleForm);
-
-formEdit.addEventListener('submit', function(e) {
   profileName.textContent = nameInput.value;
   profileDescription.textContent = descriptionInput.value;
 
   // call the same function used to open the form, to close it
   toggleForm();
+}
 
-  /* End of JS code for profile edit */
-})
+editProfile.addEventListener('click', toggleForm);
+closeEditProfile.addEventListener('click', toggleForm);
+
+formEdit.addEventListener('submit', formSubmitHandler);
+/* End of JS code for profile edit */
 
 
 /* JS Code for add button
