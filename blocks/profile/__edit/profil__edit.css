@@ -1,8 +1,13 @@
 .profile__edit {
+  position: absolute;
   display: flex;
   width: 18px;
   height: 18px;
-  margin: 20px 0 0 12px;
+  margin: 20px 0 0;
+  padding: 0;
+
+  right: -20%;
+  top: 0;
 
   background: url('../../../images/edit-icon.svg') center no-repeat;
   border: 1px solid #FFFFFF;
@@ -12,6 +17,14 @@
 
 .profile__edit:hover {
   border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+
+@media screen and (min-width: 768px) {
+  .profile__edit {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 

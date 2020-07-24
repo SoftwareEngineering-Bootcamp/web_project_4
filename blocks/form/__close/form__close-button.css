@@ -6,8 +6,8 @@
   box-sizing: border-box;
   cursor: pointer;
   position: absolute;
-  height: 30px;
-  width: 30px;
+  height: 28px;
+  width: 28px;
 
   background: url('../../../images/close-icon.svg') center no-repeat;
   border: 0;
