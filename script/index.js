@@ -14,7 +14,7 @@ function toggleForm() {
   overlay.classList.toggle('popup_open');
 
   //copy profile-name and profile-description into form fields
-  if('popup_open') {
+  if(overlay.classList.contains('popup_open')) {
     nameInput.value = profileName.textContent;
     descriptionInput.value = profileDescription.textContent;
   }

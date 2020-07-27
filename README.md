@@ -5,15 +5,17 @@
 
 ### Description
 
-* Adaptive design with Mobile first approach.
-* Page structured with BEM methodology.
+* *Adaptive design* with *Mobile first approach*.
+* Page structured with *BEM* methodology.
 * Technologies: **_HTML_**, **_CSS_** and **_JavaScript_**.
-* **CSS Properties:** _flexbox_, _grid container_, _media queries_.
+* **Position:** _flexbox_, _grid container_, _media queries_.
 
 ### Submission Notes
 * Project looks like brief on Figma.
 * Popup form fixed when mouse over edit button with overlay effect on hole page.
 * Transition and animation effect on Edit Form conform to UI Kit.
+* Hover effect on all clickable elements.
+* Fix position of cards using justify and align properties on grid layout to get element centered.
 
 ### Overview
 
