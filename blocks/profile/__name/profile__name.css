@@ -25,5 +25,7 @@
     font-size: 42px;
     line-height: 56px;
     /* or 133% */
+
+    text-align: left;
   }
 }

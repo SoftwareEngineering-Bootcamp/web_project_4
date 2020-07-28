@@ -1,5 +1,3 @@
-@import url('./_title/profile__info_title.css');
-
 .profile__info {
   display: flex;
   flex-direction: column;
