@@ -1,5 +1,7 @@
 @import url('./__form/popup__form.css');
 
+@import url('./__image/popup__image.css');
+
 .popup {
   display: none;
   position: fixed;
