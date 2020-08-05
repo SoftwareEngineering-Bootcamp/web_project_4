@@ -10,6 +10,7 @@ const editProfileButton = document.querySelector('.profile__edit');
 //close buttons
 const closeAddCardForm = addCardModal.querySelector('.form__close-button');
 const closeEditProfile = editProfileModal.querySelector('.form__close-button');
+const closePopupImage = imageOpenModal.querySelector('.popup__close');
 
 //form inputs
 const nameInput = document.querySelector('.form__input_type_name');
@@ -100,6 +101,7 @@ initialCards.forEach(data => {
   cardName.textContent = data.name;
   cardImage.style.backgroundImage = `url(${data.link})`;
   //cardImage.src = data.link;
+  cardImage.style.backgroundSize = "cover";
 
   cardLikeButton.addEventListener('click', () => {
     //change like button style on click
@@ -116,9 +118,15 @@ initialCards.forEach(data => {
     const imageCaptionPopup = imageOpenModal.querySelector('.popup__image-caption');
 
     imagePopup.src = data.link;
-    imagePopup.textContent = data.name;
+    imageCaptionPopup.textContent = data.name;
     toggleForm(imageOpenModal);
-  })
+
+    // close a popup image
+  closePopupImage.addEventListener('click', () => {
+    toggleForm(imageOpenModal);
+  });
+  });
+
 
   cardList.prepend(cardElement);
 });

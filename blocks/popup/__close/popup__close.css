@@ -1,8 +1,6 @@
-@import url('./_type/form__close_type_image.css');
-
-.form__close-button {
-  right: -10%;
-  top: -10%;
+.popup__close {
+  top: -8%;
+  right: -13%;
   margin: 0 auto;
   padding: 0;
   box-sizing: border-box;
@@ -15,15 +13,23 @@
   border: 0;
 }
 
-.form__close-button:hover {
+.popup__close:hover {
   opacity: .6;
 }
 
 
 @media screen and (min-width: 768px) {
-  .form__close-button {
+  .popup__close {
     height: 40px;
     width: 40px;
+    top: -8%;
+    right: -10%;
   }
 }
 
+@media screen and (min-width: 1024px) {
+  .popup__close {
+    top: -8%;
+    right: -6%;
+  }
+}

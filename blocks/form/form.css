@@ -8,6 +8,12 @@
 
 @import url('./__close/form__close-button.css');
 
+@import url('./__image/form__image.css');
+
+@import url('./__image/_caption/form__image_caption.css');
+
+@import url('./_type/form_type_image.css');
+
 .form {
   position: relative;
   width: 80%;
