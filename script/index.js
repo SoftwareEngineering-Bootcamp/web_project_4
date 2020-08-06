@@ -20,11 +20,22 @@ const descriptionInput = document.querySelector('.form__input_type_description')
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 
-/* JS code for profile edit */
-//function to open both edit profile popup and add card popup
+//functions to toggle classes
 function toggleForm(modal) {
   modal.classList.toggle('popup_open');
 }
+
+function changeLikeButton(event) {
+  event.classList.toggle('element__like_active');
+}
+
+//delete an element
+function deleteCard(card) {
+  card.remove();
+}
+
+/* JS code for profile edit */
+//function to open both edit profile popup and add card popup
 
 function formSubmitHandler(event) {
   event.preventDefault();
@@ -99,18 +110,19 @@ initialCards.forEach(data => {
   const cardDeleteButton = cardElement.querySelector('.element__delete');
 
   cardName.textContent = data.name;
-  cardImage.style.backgroundImage = `url(${data.link})`;
-  //cardImage.src = data.link;
+  cardImage.style.backgroundImage = `url(${data.link})`; //cardImage.src = data.link;
   cardImage.style.backgroundSize = "cover";
 
+  //change like button style on click
   cardLikeButton.addEventListener('click', () => {
-    //change like button style on click
-  })
+    console.log(cardLikeButton);
+    changeLikeButton(cardLikeButton);
+  });
 
+  //delete a card on click
   cardDeleteButton.addEventListener('click', () => {
-    //delete a card on click
-  })
-
+    deleteCard(cardElement);
+  });
 
   //open a photo on full-screen on click
   cardImage.addEventListener('click', () => {
@@ -122,9 +134,9 @@ initialCards.forEach(data => {
     toggleForm(imageOpenModal);
 
     // close a popup image
-  closePopupImage.addEventListener('click', () => {
-    toggleForm(imageOpenModal);
-  });
+    closePopupImage.addEventListener('click', () => {
+      toggleForm(imageOpenModal);
+    });
   });
 
 

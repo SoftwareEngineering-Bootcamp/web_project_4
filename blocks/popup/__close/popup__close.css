@@ -1,7 +1,7 @@
 .popup__close {
   top: -8%;
   right: -13%;
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
   cursor: pointer;
@@ -22,14 +22,19 @@
   .popup__close {
     height: 40px;
     width: 40px;
-    top: -8%;
     right: -10%;
+    top: -7%;
   }
 }
 
 @media screen and (min-width: 1024px) {
   .popup__close {
-    top: -8%;
-    right: -6%;
+    right: 0;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .popup__close {
+    right: -5%;
   }
 }
