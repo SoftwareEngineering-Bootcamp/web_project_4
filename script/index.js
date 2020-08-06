@@ -1,75 +1,144 @@
-/*JS code for profile edit*/
-let editProfile = document.querySelector('.profile__edit');
-let closeEditProfile = document.querySelector('.form__close-button');
-let formEdit = document.querySelector('.popup__form');
-let nameInput = document.querySelector('.form__input_type_name');
-let descriptionInput = document.querySelector('.form__input_type_description');
-let profileName = document.querySelector('.profile__name');
-let profileDescription = document.querySelector('.profile__description');
-let overlay = document.querySelector('.popup');
+//wrappers
+const addCardModal = document.querySelector('.popup_type_add-card');
+const editProfileModal = document.querySelector('.popup_type_edit-profile');
+const imageOpenModal = document.querySelector('.popup_type_image');
 
+//open buttons
+const addCardButton = document.querySelector('.add-button');
+const editProfileButton = document.querySelector('.profile__edit');
 
-/* function to open profile edit form */
-function toggleForm() {
-  overlay.classList.toggle('popup_open');
+//close buttons
+const closeAddCardForm = addCardModal.querySelector('.form__close-button');
+const closeEditProfile = editProfileModal.querySelector('.form__close-button');
+const closePopupImage = imageOpenModal.querySelector('.popup__close');
 
-  //copy profile-name and profile-description into form fields
-  if(overlay.classList.contains('popup_open')) {
-    nameInput.value = profileName.textContent;
-    descriptionInput.value = profileDescription.textContent;
-  }
+//form inputs
+const nameInput = document.querySelector('.form__input_type_name');
+const descriptionInput = document.querySelector('.form__input_type_description');
+
+//other DOM elements
+const profileName = document.querySelector('.profile__name');
+const profileDescription = document.querySelector('.profile__description');
+
+//functions to toggle classes
+function toggleForm(modal) {
+  modal.classList.toggle('popup_open');
 }
+
+function changeLikeButton(event) {
+  event.classList.toggle('element__like_active');
+}
+
+//delete an element
+function deleteCard(card) {
+  card.remove();
+}
+
+/* JS code for profile edit */
+//function to open both edit profile popup and add card popup
 
 function formSubmitHandler(event) {
   event.preventDefault();
-
   profileName.textContent = nameInput.value;
   profileDescription.textContent = descriptionInput.value;
-
-  // call the same function used to open the form, to close it
-  toggleForm();
+  toggleForm(editProfileModal);
 }
 
-editProfile.addEventListener('click', toggleForm);
-closeEditProfile.addEventListener('click', toggleForm);
+editProfileButton.addEventListener('click', () => {
+  //copy profile-name and profile-description into form fields
+  if(!editProfileModal.classList.contains('popup_open')) {
+    nameInput.value = profileName.textContent;
+    descriptionInput.value = profileDescription.textContent;
+  }
+  toggleForm(editProfileModal);
+});
+closeEditProfile.addEventListener('click', () => {
+  toggleForm(editProfileModal);
+});
 
-formEdit.addEventListener('submit', formSubmitHandler);
+editProfileModal.addEventListener('submit', formSubmitHandler);
 /* End of JS code for profile edit */
 
 
-/* JS Code for add button
+/* JS Code for add button */
 
-let element = document.querySelector('.element__item');
-let addButton = container.querySelector('.add-button');
+addCardButton.addEventListener('click', () => {
+  toggleForm(addCardModal);
+});
 
-/* function to open file upload when user click on add-button
-function toggleAddButton() {
-  addButton.classList.toggle('element__item')
-}
+closeAddCardForm.addEventListener('click', () => {
+  toggleForm(addCardModal);
+});
 
-/* function to add elements to the gallery
-function addPhoto() {
-  let photo = document.querySelector('.element__photo');
-  let place = document.querySelector('.element__name');
+const initialCards = [
+  {
+    name: "Yosemite Valley",
+    link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
+  },
+  {
+    name: "Lake Louise",
+    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
+  },
+  {
+    name: "Bald Mountains",
+    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
+  },
+  {
+    name: "Latemar",
+    link: "https://code.s3.yandex.net/web-code/latemar.jpg"
+  },
+  {
+    name: "Vanoise National Park",
+    link: "https://code.s3.yandex.net/web-code/vanoise.jpg"
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://code.s3.yandex.net/web-code/lago.jpg"
+  }
+];
 
-  element.insertAdjacentHTML('beforend', `
-    <form>
-      <li class="element__item">
-        <input type="file" name="fileUpload" value="fileUpload" class="fileUpload">
-        <label for="fileUpload">Select Photo</label>
-        <br><input type="image" src="" alt="user-image" class="element__photo">
-        <div class="element__details">
-          <h2 class="element__name">Yosemite Valley</h2>
-          <button class="element__like"></button>
-        </div>
-      </li>
-      <button type="submit" class="form__submit">Submit</button>
-    </form>`)
-  ;
+const cardTemplate = document.querySelector('.element').content.querySelector('.element__item');
+const cardList = document.querySelector('.elements__list');
 
-  /* reset fields to be able to add another picture without having to delete the previous one
-  photo.value = "";
-  place.value = "";
-}
+initialCards.forEach(data => {
+  const cardElement = cardTemplate.cloneNode(true);
 
-addButton.addEventListener('click', toggleAddButton);*/
+  //create card
+  const cardImage = cardElement.querySelector('.element__photo');
+  const cardName = cardElement.querySelector('.element__name');
+  const cardLikeButton = cardElement.querySelector('.element__like');
+  const cardDeleteButton = cardElement.querySelector('.element__delete');
+
+  cardName.textContent = data.name;
+  cardImage.style.backgroundImage = `url(${data.link})`; //cardImage.src = data.link;
+  cardImage.style.backgroundSize = "cover";
+
+  //change like button style on click
+  cardLikeButton.addEventListener('click', () => {
+    console.log(cardLikeButton);
+    changeLikeButton(cardLikeButton);
+  });
+
+  //delete a card on click
+  cardDeleteButton.addEventListener('click', () => {
+    deleteCard(cardElement);
+  });
+
+  //open a photo on full-screen on click
+  cardImage.addEventListener('click', () => {
+    const imagePopup = imageOpenModal.querySelector('.popup__image');
+    const imageCaptionPopup = imageOpenModal.querySelector('.popup__image-caption');
+
+    imagePopup.src = data.link;
+    imageCaptionPopup.textContent = data.name;
+    toggleForm(imageOpenModal);
+
+    // close a popup image
+    closePopupImage.addEventListener('click', () => {
+      toggleForm(imageOpenModal);
+    });
+  });
+
+
+  cardList.prepend(cardElement);
+});

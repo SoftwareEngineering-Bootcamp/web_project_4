@@ -1,6 +1,7 @@
 @import url('./__list/elements__list.css');
 
 .elements {
+  position: relative;
   width: 100%;
   margin: 36px auto 0;
   padding: 0;
