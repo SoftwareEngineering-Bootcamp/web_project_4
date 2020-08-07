@@ -15,6 +15,8 @@ const closePopupImage = imageOpenModal.querySelector('.popup__close');
 //form inputs
 const nameInput = document.querySelector('.form__input_type_name');
 const descriptionInput = document.querySelector('.form__input_type_description');
+const cardNameInput = document.querySelector('.form__input_type_card-title');
+const cardUrlInput = document.querySelector('.form__input_type_card-url');
 
 //other DOM elements
 const profileName = document.querySelector('.profile__name');
@@ -42,6 +44,7 @@ function formSubmitHandler(event) {
   profileName.textContent = nameInput.value;
   profileDescription.textContent = descriptionInput.value;
   toggleForm(editProfileModal);
+  console.log("save profile");
 }
 
 editProfileButton.addEventListener('click', () => {
@@ -52,6 +55,7 @@ editProfileButton.addEventListener('click', () => {
   }
   toggleForm(editProfileModal);
 });
+
 closeEditProfile.addEventListener('click', () => {
   toggleForm(editProfileModal);
 });
@@ -61,14 +65,6 @@ editProfileModal.addEventListener('submit', formSubmitHandler);
 
 
 /* JS Code for add button */
-
-addCardButton.addEventListener('click', () => {
-  toggleForm(addCardModal);
-});
-
-closeAddCardForm.addEventListener('click', () => {
-  toggleForm(addCardModal);
-});
 
 const initialCards = [
   {
@@ -115,7 +111,6 @@ initialCards.forEach(data => {
 
   //change like button style on click
   cardLikeButton.addEventListener('click', () => {
-    console.log(cardLikeButton);
     changeLikeButton(cardLikeButton);
   });
 
@@ -142,3 +137,25 @@ initialCards.forEach(data => {
 
   cardList.prepend(cardElement);
 });
+
+
+console.log(initialCards[0]);
+
+//replace first card with the one added by user
+addCardButton.addEventListener('click', function changeFirstCard(event) {
+  event.preventDefault();
+
+  toggleForm(addCardModal);
+  if(initialCards.length !== 0 && addCardModal.classList.contains('popup_open')) {
+    initialCards[0].name = cardNameInput.value;
+    initialCards[0].link = cardUrlInput.value;
+  }
+
+  cardNameInput.value = "";
+  cardUrlInput.value = "";
+  console.log(initialCards[0]);
+});
+
+
+
+/* Animations on button clicks */
