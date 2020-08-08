@@ -15,6 +15,8 @@ const closePopupImage = imageOpenModal.querySelector('.popup__close');
 //form inputs
 const nameInput = document.querySelector('.form__input_type_name');
 const descriptionInput = document.querySelector('.form__input_type_description');
+const cardNameInput = document.querySelector('.form__input_type_card-title');
+const cardUrlInput = document.querySelector('.form__input_type_card-url');
 
 //other DOM elements
 const addCardSubmitButton = document.querySelector('.form__submit_add-card');
@@ -47,6 +49,7 @@ function formSubmitHandler(event) {
   profileName.textContent = nameInput.value;
   profileDescription.textContent = descriptionInput.value;
   toggleForm(editProfileModal);
+  console.log("save profile");
 }
 
 //open hidden content in HTML
@@ -65,6 +68,7 @@ editProfileButton.addEventListener('click', () => {
   }
   toggleForm(editProfileModal);
 });
+
 closeEditProfile.addEventListener('click', () => {
   toggleForm(editProfileModal);
 });
@@ -125,7 +129,6 @@ initialCards.forEach(data => {
 
   //change like button style on click
   cardLikeButton.addEventListener('click', () => {
-    console.log(cardLikeButton);
     changeLikeButton(cardLikeButton);
   });
 

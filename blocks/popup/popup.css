@@ -11,7 +11,7 @@
 @import url('./_type/popup_type_image.css');
 
 .popup {
-  display: none;
+  visibility: hidden;
   position: fixed;
 
   /*overlay effect*/
@@ -29,4 +29,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  visibility: visible;
+
+  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
