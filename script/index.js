@@ -27,14 +27,7 @@ const profileDescription = document.querySelector('.profile__description');
 
 //functions
 
-//function to add a card to gallery
-function addCard(cardTitle, cardLink) {
-  const cardElement = cardTemplate.cloneNode(true);
-  cardElement.querySelector('.element__photo').textContent = cardTitle;
-  cardElement.querySelector('.element__name').value = cardImage;
 
-  cardList.prepend(cardElement);
-}
 function changeLikeButton(event) {
   event.classList.toggle('element__like_active');
 }
@@ -156,15 +149,36 @@ initialCards.forEach(data => {
   cardList.prepend(cardElement);
 });
 
+//function to add a card to gallery
+function addCard(cardTitle, cardLink) {
+  const cardElement = cardTemplate.cloneNode(true);
+  cardElement.querySelector('.element__name').textContent = cardTitle;
+  cardElement.querySelector('.element__photo').textContent = cardLink;
+
+  cardList.prepend(cardElement);
+}
+
 //save card user edited when clcik on create button
-addCardSubmitButton.addEventListener('submit', event => {
+addCardSubmitButton.addEventListener("click", event => {
   event.preventDefault();
+  console.log("event" + event);
 
-  const cardTitle = document.querySelector('.form__input_type_card-title');
-  const cardLink = document.querySelector('.form__input_type_url');
+  const cardTitle = document.querySelector('.form__input_type_card-title')
+  const cardLink = document.querySelector('.form__input_type_card-url');
 
-  addCard(cardTitle.value, cardLink.value);
+  addCard(cardTitle.value, cardLink.url);
+
+  /*console.log("after add of a card");
+  console.log(cardTitle.value);
+  console.log(cardLink.value);*/
   cardTitle.value = "";
-  cardLink.style.backgroundImage = `url(${cardLink.value})`;
+  cardLink.value = "";
+
+  /*console.log("before close")
+  console.log(cardTitle.value);
+  console.log(cardLink.value);*/
   toggleForm(addCardModal);
-})
+  /*console.log("after close")
+  console.log(cardTitle.value);
+  console.log(cardLink.value);*/
+});

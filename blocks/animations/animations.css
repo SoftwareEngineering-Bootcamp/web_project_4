@@ -1,8 +1,10 @@
-@keyframes animations {
+@import url('./fade-in/fade-in.css');
 
-}
+@import url('./fade-out/fade-out.css');
 
-/*circle shape*/
+
+
+/*circle shape
 .animations {
   width: 300px;
   height: 300px;
@@ -11,3 +13,11 @@
   clip-path: circle();
   background: lightblue;
 }
+*/
+
+/*
+w3-spin{animation:w3-spin 2s infinite linear}
+.w3-animate-fading{animation:fading 10s infinite}@keyframes fading{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+.w3-animate-opacity{animation:opac 0.8s}@keyframes opac{from{opacity:0} to{opacity:1}}
+*/
+
