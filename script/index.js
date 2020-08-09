@@ -6,6 +6,7 @@ const imageOpenModal = document.querySelector('.popup_type_image');
 //open buttons
 const addCardButton = document.querySelector('.add-button');
 const editProfileButton = document.querySelector('.profile__edit');
+const expandPhoto = document.querySelector('.element__photo');
 
 //close buttons
 const closeAddCardForm = addCardModal.querySelector('.form__close-button');
@@ -27,6 +28,10 @@ const profileDescription = document.querySelector('.profile__description');
 
 //functions
 
+//function to add animation on button click
+function animateButton() {
+
+}
 
 function changeLikeButton(event) {
   event.classList.toggle('element__like_active');
@@ -153,7 +158,8 @@ initialCards.forEach(data => {
 function addCard(cardTitle, cardLink) {
   const cardElement = cardTemplate.cloneNode(true);
   cardElement.querySelector('.element__name').textContent = cardTitle;
-  cardElement.querySelector('.element__photo').textContent = cardLink;
+  cardElement.querySelector('.element__photo').style.backgroundImage = `url("${cardLink}")`;
+  cardElement.querySelector('.element__photo').style.backgroundSize = "cover";
 
   cardList.prepend(cardElement);
 }
@@ -166,19 +172,10 @@ addCardSubmitButton.addEventListener("click", event => {
   const cardTitle = document.querySelector('.form__input_type_card-title')
   const cardLink = document.querySelector('.form__input_type_card-url');
 
-  addCard(cardTitle.value, cardLink.url);
+  addCard(cardTitle.value, cardLink.value);
 
-  /*console.log("after add of a card");
-  console.log(cardTitle.value);
-  console.log(cardLink.value);*/
   cardTitle.value = "";
   cardLink.value = "";
 
-  /*console.log("before close")
-  console.log(cardTitle.value);
-  console.log(cardLink.value);*/
   toggleForm(addCardModal);
-  /*console.log("after close")
-  console.log(cardTitle.value);
-  console.log(cardLink.value);*/
 });
