@@ -21,12 +21,12 @@
           <div class="profile__info">
             <div class="profile__title">
               <h1 class="profile__name">Jacques Cousteau</h1>
-              <button type="button" class="profile__edit"></button>
+              <button type="button" aria-label="edit-profile"class="profile__edit"></button>
             </div>
             <p class="profile__description">Explorer</p>
           </div>
         </div>
-        <button class="add-button"></button>
+        <button aria-label="add-card-button" class="add-button"></button>
       </section>
 
       <section class="elements">
@@ -45,8 +45,8 @@
           <input type="text" name="profile-name" class="form__input form__input_type_name" placeholder="Name" required>
           <input type="text" name="profile-description" class="form__input form__input_type_description" placeholder="About Me" required>
         </fieldset>
-        <button type="submit" class="form__submit">Save</button>
-        <button type="button" class="form__close-button"></button>
+        <button type="submit" aria-label="save-profile-edit" class="form__submit">Save</button>
+        <button type="button" aria-label="close-edit-profile" class="form__close-button"></button>
       </form>
     </div>
 
@@ -58,16 +58,16 @@
           <input type="text" name="card-title" class="form__input form__input_type_card-title" placeholder="Title" required>
           <input type="url" name="image-link" class="form__input form__input_type_card-url" placeholder="Image link" required>
         </fieldset>
-        <button type="submit" class="form__submit form__submit_add-card">Create</button>
-        <button type="button" class="form__close-button"></button>
+        <button type="submit" aria-label="save-add-card" class="form__submit form__submit_add-card">Create</button>
+        <button type="button" aria-label="close-add-card" class="form__close-button"></button>
       </form>
     </div>
 
     <!-- overlay form pop up to show image on click -->
     <div class="popup popup_type_image">
       <div class="popup__content">
-        <button type="button" class="popup__close"></button>
-        <figure name="image-popup" class="popup__figure">
+        <button type="button" aria-label="close-expand-card" class="popup__close"></button>
+        <figure class="popup__figure">
           <img src="" alt="" class="popup__image">
           <figcaption class="popup__image-caption"></figcaption>
         </figure>
@@ -77,11 +77,11 @@
     <!-- template to add card to the page-->
     <template class="element">
       <li class="element__item">
-        <button type="button" class="element__delete"></button>
+        <button type="button" aria-label="delete-card" class="element__delete"></button>
         <div class="element__photo"></div>
         <div class="element__details">
           <h2 class="element__name"></h2>
-          <button type="button" class="element__like"></button>
+          <button type="button" aria-label="like-card" class="element__like"></button>
         </div>
       </li>
     </template>

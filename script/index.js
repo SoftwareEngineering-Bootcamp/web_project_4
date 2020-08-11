@@ -45,7 +45,6 @@ function formSubmitHandler(event) {
   profileName.textContent = nameInput.value;
   profileDescription.textContent = descriptionInput.value;
   toggleForm(editProfileModal);
-  console.log("save profile");
 }
 //function to add a card to gallery
 function addCard(cardTitle, cardLink) {
@@ -74,10 +73,11 @@ function addCard(cardTitle, cardLink) {
   expandCard.addEventListener("click", () => {
     const imagePopup = imageOpenModal.querySelector('.popup__image');
     const imageCaptionPopup = imageOpenModal.querySelector('.popup__image-caption');
+
     imagePopup.src = cardLink;
+    imagePopup.alt = cardTitle;
     imageCaptionPopup.textContent = cardTitle;
     toggleForm(imageOpenModal);
-
     // close popup image
     closePopupImage.addEventListener('click', () => {
       toggleForm(imageOpenModal);
@@ -145,17 +145,15 @@ const initialCards = [
 ];
 
 //add first 6 and base cards to gallery
-initialCards.forEach(data => {
+initialCards.forEach((data) => {
   addCard(data.name, data.link);
 });
 
 //save card user edited when clcik on create button
-addCardSubmitButton.addEventListener("click", event => {
+addCardSubmitButton.addEventListener("click", (event) => {
   event.preventDefault();
-  const cardTitle = document.querySelector('.form__input_type_card-title')
-  const cardLink = document.querySelector('.form__input_type_card-url');
 
-  addCard(cardTitle.value, cardLink.value);
-  cardTitle.value = "";
-  cardLink.value = "";
+  addCard(cardNameInput.value, cardUrlInput.value);
+  cardNameInput.value = "";
+  cardUrlInput.value = "";
 });
