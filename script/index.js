@@ -6,7 +6,6 @@ const imageOpenModal = document.querySelector('.popup_type_image');
 //open buttons
 const addCardButton = document.querySelector('.add-button');
 const editProfileButton = document.querySelector('.profile__edit');
-const expandPhoto = document.querySelector('.element__photo');
 
 //close buttons
 const closeAddCardForm = addCardModal.querySelector('.form__close-button');
@@ -26,21 +25,20 @@ const cardList = document.querySelector('.elements__list');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 
-//functions
+/*functions*/
 
-//function to add animation on button click
-function animateButton() {
-
+//open/hide a hidden content in HTML (edit-profile, add-card and expand-a-card)
+function toggleForm(modal) {
+  modal.classList.toggle('popup_open');
 }
-
+//change like button state on click
 function changeLikeButton(event) {
   event.classList.toggle('element__like_active');
 }
 //delete an element from gallery
-function deleteCard(card) {
+function removeCard(card) {
   card.remove();
 }
-
 //save user input on edit profile
 function formSubmitHandler(event) {
   event.preventDefault();
@@ -49,10 +47,44 @@ function formSubmitHandler(event) {
   toggleForm(editProfileModal);
   console.log("save profile");
 }
+//function to add a card to gallery
+function addCard(cardTitle, cardLink) {
+  const cardElement = cardTemplate.cloneNode(true);
+  const cardLikeButton = cardElement.querySelector('.element__like');
+  const deleteCard = cardElement.querySelector('.element__delete');
+  const expandCard = cardElement.querySelector('.element__photo');
 
-//open hidden content in HTML
-function toggleForm(modal) {
-  modal.classList.toggle('popup_open');
+  cardElement.querySelector('.element__name').textContent = cardTitle;
+  cardElement.querySelector('.element__photo').style.backgroundImage = `url("${cardLink}")`;
+  cardElement.querySelector('.element__photo').style.backgroundSize = "cover";
+
+  cardList.prepend(cardElement);
+
+  //change like button style on click
+  cardLikeButton.addEventListener('click', () => {
+    changeLikeButton(cardLikeButton);
+  });
+
+  //delete card from gallery
+  deleteCard.addEventListener("click", () => {
+    removeCard(cardElement);
+  });
+
+  //expand card on full screen
+  expandCard.addEventListener("click", () => {
+    const imagePopup = imageOpenModal.querySelector('.popup__image');
+    const imageCaptionPopup = imageOpenModal.querySelector('.popup__image-caption');
+    imagePopup.src = cardLink;
+    imageCaptionPopup.textContent = cardTitle;
+    toggleForm(imageOpenModal);
+
+    // close popup image
+    closePopupImage.addEventListener('click', () => {
+      toggleForm(imageOpenModal);
+    });
+  });
+
+  toggleForm(addCardModal);
 }
 
 /* handle user interactions */
@@ -79,11 +111,12 @@ editProfileModal.addEventListener('submit', formSubmitHandler);
 addCardButton.addEventListener('click', () => {
   toggleForm(addCardModal);
 });
+
 closeAddCardForm.addEventListener('click', () => {
   toggleForm(addCardModal);
 });
 
-//initial values of gallery
+//initial values of cards in gallery
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -113,69 +146,16 @@ const initialCards = [
 
 //add first 6 and base cards to gallery
 initialCards.forEach(data => {
-  const cardElement = cardTemplate.cloneNode(true);
-
-  const cardLikeButton = cardElement.querySelector('.element__like');
-  const cardDeleteButton = cardElement.querySelector('.element__delete');
-  //create card
-  const cardImage = cardElement.querySelector('.element__photo');
-  const cardName = cardElement.querySelector('.element__name');
-
-  cardName.textContent = data.name;
-  cardImage.style.backgroundImage = `url(${data.link})`; //cardImage.src = data.link;
-  cardImage.style.backgroundSize = "cover";
-
-  //change like button style on click
-  cardLikeButton.addEventListener('click', () => {
-    changeLikeButton(cardLikeButton);
-  });
-
-  //delete a card on click
-  cardDeleteButton.addEventListener('click', () => {
-    deleteCard(cardElement);
-  });
-
-  //open a photo on full-screen on click
-  cardImage.addEventListener('click', () => {
-    const imagePopup = imageOpenModal.querySelector('.popup__image');
-    const imageCaptionPopup = imageOpenModal.querySelector('.popup__image-caption');
-
-    imagePopup.src = data.link;
-    imageCaptionPopup.textContent = data.name;
-    toggleForm(imageOpenModal);
-
-    // close a popup image
-    closePopupImage.addEventListener('click', () => {
-      toggleForm(imageOpenModal);
-    });
-  });
-
-
-  cardList.prepend(cardElement);
+  addCard(data.name, data.link);
 });
-
-//function to add a card to gallery
-function addCard(cardTitle, cardLink) {
-  const cardElement = cardTemplate.cloneNode(true);
-  cardElement.querySelector('.element__name').textContent = cardTitle;
-  cardElement.querySelector('.element__photo').style.backgroundImage = `url("${cardLink}")`;
-  cardElement.querySelector('.element__photo').style.backgroundSize = "cover";
-
-  cardList.prepend(cardElement);
-}
 
 //save card user edited when clcik on create button
 addCardSubmitButton.addEventListener("click", event => {
   event.preventDefault();
-  console.log("event" + event);
-
   const cardTitle = document.querySelector('.form__input_type_card-title')
   const cardLink = document.querySelector('.form__input_type_card-url');
 
   addCard(cardTitle.value, cardLink.value);
-
   cardTitle.value = "";
   cardLink.value = "";
-
-  toggleForm(addCardModal);
 });
