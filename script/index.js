@@ -156,4 +156,15 @@ addCardSubmitButton.addEventListener("click", (event) => {
   addCard(cardNameInput.value, cardUrlInput.value);
   cardNameInput.value = "";
   cardUrlInput.value = "";
+  /*none of these are not resetting the input fields, look into it later for improvment*/
+  //document.getElementsByClassName('.form__input_type_card-title').reset();
+  //document.getElementsByClassName('.form__input_type_card-url').reset();
+
+  //cardTitle = document.getElementsByClassName('.form__input_type_card-title').reset();
+  //cardLink = document.getElementsByClassName('.form__input_type_card-url').reset();
+
+  //cardTitle.reset();
+  //cardLink.reset();
+
+  //document.getElementsByClassName('.popup__form').reset();
 });
