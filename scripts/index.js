@@ -1,4 +1,5 @@
 //wrappers
+const modal = document.querySelectorAll('.popup');
 const addCardModal = document.querySelector('.popup_type_add-card');
 const editProfileModal = document.querySelector('.popup_type_edit-profile');
 const imageOpenModal = document.querySelector('.popup_type_image');
@@ -19,17 +20,27 @@ const cardNameInput = document.querySelector('.form__input_type_card-title');
 const cardUrlInput = document.querySelector('.form__input_type_card-url');
 
 //other DOM elements
-const addCardSubmitButton = document.querySelector('.form__submit_add-card');
+const addForm = document.forms.add;
 const cardTemplate = document.querySelector('.element').content.querySelector('.element__item');
 const cardList = document.querySelector('.elements__list');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 
 /*functions*/
+//open a hidden content in HTML (edit-profile, add-card and expand-a-card)
+function openForm(modal) {
+  modal.classList.add('popup_open');
 
-//open/hide a hidden content in HTML (edit-profile, add-card and expand-a-card)
-function toggleForm(modal) {
-  modal.classList.toggle('popup_open');
+  //hide a popup form with ESC key
+  window.addEventListener("keydown", (evt) => {
+    if(evt.key === "Escape") {
+      closeForm(modal);
+    }
+  });
+}
+//hide or close a hidden content in HTML (edit-profile, add-card and expand-a-card)
+function closeForm(modal) {
+  modal.classList.remove('popup_open');
 }
 //change like button state on click
 function changeLikeButton(event) {
@@ -44,7 +55,7 @@ function formSubmitHandler(event) {
   event.preventDefault();
   profileName.textContent = nameInput.value;
   profileDescription.textContent = descriptionInput.value;
-  toggleForm(editProfileModal);
+  closeForm(editProfileModal);
 }
 //function to add a card to gallery
 function addCard(cardTitle, cardLink) {
@@ -77,17 +88,25 @@ function addCard(cardTitle, cardLink) {
     imagePopup.src = cardLink;
     imagePopup.alt = cardTitle;
     imageCaptionPopup.textContent = cardTitle;
-    toggleForm(imageOpenModal);
+    openForm(imageOpenModal);
     // close popup image
     closePopupImage.addEventListener('click', () => {
-      toggleForm(imageOpenModal);
+      closeForm(imageOpenModal);
     });
   });
 
-  toggleForm(addCardModal);
+  closeForm(addCardModal);
 }
 
 /* handle user interactions */
+
+//hide a popup form by clicking on overlay
+window.onclick = ((event) => {
+  if(event.target === addCardModal || event.target === editProfileModal || event.target === imageOpenModal) {
+    event.target.classList.remove('popup_open');
+  } else { return; }
+});
+
 
 /* JS code for profile edit */
 editProfileButton.addEventListener('click', () => {
@@ -96,11 +115,11 @@ editProfileButton.addEventListener('click', () => {
     nameInput.value = profileName.textContent;
     descriptionInput.value = profileDescription.textContent;
   }
-  toggleForm(editProfileModal);
+  openForm(editProfileModal);
 });
 
 closeEditProfile.addEventListener('click', () => {
-  toggleForm(editProfileModal);
+  closeForm(editProfileModal);
 });
 
 editProfileModal.addEventListener('submit', formSubmitHandler);
@@ -109,11 +128,12 @@ editProfileModal.addEventListener('submit', formSubmitHandler);
 
 /* JS Code for add button */
 addCardButton.addEventListener('click', () => {
-  toggleForm(addCardModal);
+  openForm(addCardModal);
 });
 
 closeAddCardForm.addEventListener('click', () => {
-  toggleForm(addCardModal);
+  addForm.reset();
+  closeForm(addCardModal);
 });
 
 //initial values of cards in gallery
@@ -150,21 +170,9 @@ initialCards.forEach((data) => {
 });
 
 //save card user edited when clcik on create button
-addCardSubmitButton.addEventListener("click", (event) => {
+addForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
   addCard(cardNameInput.value, cardUrlInput.value);
-  cardNameInput.value = "";
-  cardUrlInput.value = "";
-  /*none of these are not resetting the input fields, look into it later for improvment*/
-  //document.getElementsByClassName('.form__input_type_card-title').reset();
-  //document.getElementsByClassName('.form__input_type_card-url').reset();
-
-  //cardTitle = document.getElementsByClassName('.form__input_type_card-title').reset();
-  //cardLink = document.getElementsByClassName('.form__input_type_card-url').reset();
-
-  //cardTitle.reset();
-  //cardLink.reset();
-
-  //document.getElementsByClassName('.popup__form').reset();
+  addForm.reset();
 });

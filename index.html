@@ -39,26 +39,32 @@
 
     <!-- overlay form pop up for user to update profile section -->
     <div class="popup popup_type_edit-profile">
-      <form name="profile-edit-form" class="popup__form form">
+      <form name="profile" class="form popup__form">
         <h2 class="form__title">Edit Profile</h2>
         <fieldset class="form__field">
-          <input type="text" name="profile-name" class="form__input form__input_type_name" placeholder="Name" required>
-          <input type="text" name="profile-description" class="form__input form__input_type_description" placeholder="About Me" required>
+          <input id="profile-name" type="text" name="name" class="form__input form__input_type_name" placeholder="Name" minlength="2" maxlength="40" required>
+          <span id="profile-name-error" class="form__field_error"></span>
+
+          <input id="profile-description" type="text" name="description" class="form__input form__input_type_description" placeholder="About Me" minlength="2" maxlength="200" required>
+          <span id="profile-description-error" class="form__field_error"></span>
         </fieldset>
-        <button type="submit" aria-label="save-profile-edit" class="form__submit">Save</button>
+        <button type="submit" aria-label="save-profile-edit" class="form__submit ">Save</button>
         <button type="button" aria-label="close-edit-profile" class="form__close-button"></button>
       </form>
     </div>
 
     <!-- overlay form pop up for user to add a card -->
     <div class="popup popup_type_add-card">
-      <form name="add-card-to-gallery" class="popup__form form">
+      <form name="add" class="form popup__form">
         <h2 class="form__title">New place</h2>
         <fieldset class="form__field">
-          <input type="text" name="card-title" class="form__input form__input_type_card-title" placeholder="Title" required>
-          <input type="url" name="image-link" class="form__input form__input_type_card-url" placeholder="Image link" required>
+          <input id="card-title" type="text" name="title" class="form__input form__input_type_card-title" placeholder="Title" minlength="2" maxlength="30" required>
+          <span id="card-title-error" class="form__field_error"></span>
+
+          <input id="card-url" type="url" name="image-link" class="form__input form__input_type_card-url" placeholder="Image link" required>
+          <span id="card-url-error" class="form__field_error"></span>
         </fieldset>
-        <button type="submit" aria-label="save-add-card" class="form__submit form__submit_add-card">Create</button>
+        <button type="submit" aria-label="save-add-card" class="form__submit form__submit_disabled">Create</button>
         <button type="button" aria-label="close-add-card" class="form__close-button"></button>
       </form>
     </div>
@@ -86,6 +92,7 @@
       </li>
     </template>
 
-    <script src="./script/index.js"></script>
+    <script src="./scripts/validate.js"></script>
+    <script src="./scripts/index.js"></script>
   </body>
 </html>
