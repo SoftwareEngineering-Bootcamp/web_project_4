@@ -1,5 +1,4 @@
 //wrappers
-const modal = document.querySelectorAll('.popup');
 const addCardModal = document.querySelector('.popup_type_add-card');
 const editProfileModal = document.querySelector('.popup_type_edit-profile');
 const imageOpenModal = document.querySelector('.popup_type_image');
@@ -27,11 +26,17 @@ const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 
 /*functions*/
+
 //open a hidden content in HTML (edit-profile, add-card and expand-a-card)
 function openForm(modal) {
   modal.classList.add('popup_open');
-
-  //hide a popup form with ESC key
+  //add listener to hide a popup form by clicking on overlay
+  modal.addEventListener('click', (event) => {
+    if(event.target === modal) {
+      event.target.classList.remove('popup_open');
+    }
+  });
+  //add listener to hide a popup form with ESC key
   window.addEventListener("keydown", (evt) => {
     if(evt.key === "Escape") {
       closeForm(modal);
@@ -41,6 +46,16 @@ function openForm(modal) {
 //hide or close a hidden content in HTML (edit-profile, add-card and expand-a-card)
 function closeForm(modal) {
   modal.classList.remove('popup_open');
+  // remove listerners on overlay
+  modal.removeEventListener('click', (event) => {
+    event.preventDefault();
+  });
+  // remove listerners on window for ESC key
+  window.removeEventListener("keydown", (evt) => {
+    if(evt.key === "Escape") {
+      return;
+    }
+  });
 }
 //change like button state on click
 function changeLikeButton(event) {
@@ -66,7 +81,6 @@ function addCard(cardTitle, cardLink) {
 
   cardElement.querySelector('.element__name').textContent = cardTitle;
   cardElement.querySelector('.element__photo').style.backgroundImage = `url("${cardLink}")`;
-  cardElement.querySelector('.element__photo').style.backgroundSize = "cover";
 
   cardList.prepend(cardElement);
 
@@ -99,13 +113,6 @@ function addCard(cardTitle, cardLink) {
 }
 
 /* handle user interactions */
-
-//hide a popup form by clicking on overlay
-window.onclick = ((event) => {
-  if(event.target === addCardModal || event.target === editProfileModal || event.target === imageOpenModal) {
-    event.target.classList.remove('popup_open');
-  } else { return; }
-});
 
 
 /* JS code for profile edit */
