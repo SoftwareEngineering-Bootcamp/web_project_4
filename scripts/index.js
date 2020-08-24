@@ -27,15 +27,18 @@ const profileDescription = document.querySelector('.profile__description');
 
 /*functions*/
 
+//handle click on overlay
+function handleOverlayClick() {
+  if(event.target === addCardModal || event.target === editProfileModal || event.target === imageOpenModal) {
+    event.target.classList.remove('popup_open');
+  }
+}
+
 //open a hidden content in HTML (edit-profile, add-card and expand-a-card)
 function openForm(modal) {
   modal.classList.add('popup_open');
   //add listener to hide a popup form by clicking on overlay
-  modal.addEventListener('click', (event) => {
-    if(event.target === modal) {
-      event.target.classList.remove('popup_open');
-    }
-  });
+  modal.addEventListener('click', handleOverlayClick, true);
   //add listener to hide a popup form with ESC key
   window.addEventListener("keydown", (evt) => {
     if(evt.key === "Escape") {
@@ -47,9 +50,7 @@ function openForm(modal) {
 function closeForm(modal) {
   modal.classList.remove('popup_open');
   // remove listerners on overlay
-  modal.removeEventListener('click', (event) => {
-    event.preventDefault();
-  });
+  modal.removeEventListener('click', handleOverlayClick, true);
   // remove listerners on window for ESC key
   window.removeEventListener("keydown", (evt) => {
     if(evt.key === "Escape") {
@@ -109,7 +110,7 @@ function addCard(cardTitle, cardLink) {
     });
   });
 
-  closeForm(addCardModal);
+  closeForm(imageOpenModal);
 }
 
 /* handle user interactions */
