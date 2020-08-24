@@ -24,39 +24,47 @@ const cardTemplate = document.querySelector('.element').content.querySelector('.
 const cardList = document.querySelector('.elements__list');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
+let openedModal = null;
 
 /*functions*/
 
 //handle click on overlay
-function handleOverlayClick() {
-  if(event.target === addCardModal || event.target === editProfileModal || event.target === imageOpenModal) {
-    event.target.classList.remove('popup_open');
+const handleOverlayClick = ({target}) => {
+  if(target === openedModal) {
+    toggleModal(openedModal);
   }
 }
-
-//open a hidden content in HTML (edit-profile, add-card and expand-a-card)
-function openForm(modal) {
-  modal.classList.add('popup_open');
-  //add listener to hide a popup form by clicking on overlay
-  modal.addEventListener('click', handleOverlayClick, true);
-  //add listener to hide a popup form with ESC key
-  window.addEventListener("keydown", (evt) => {
-    if(evt.key === "Escape") {
-      closeForm(modal);
-    }
-  });
+//handle Escape keydown
+const handleEscKeyPess = ({key}) => {
+  if(key === "Escape") {
+    toggleModal(openedModal);
+  }
 }
-//hide or close a hidden content in HTML (edit-profile, add-card and expand-a-card)
-function closeForm(modal) {
-  modal.classList.remove('popup_open');
-  // remove listerners on overlay
-  modal.removeEventListener('click', handleOverlayClick, true);
-  // remove listerners on window for ESC key
-  window.removeEventListener("keydown", (evt) => {
-    if(evt.key === "Escape") {
-      return;
-    }
-  });
+//handle open and hide or close a hidden content in HTML (edit-profile, add-card and expand-a-card)
+function toggleModal(modal) {
+  const isModalOpen =  modal.classList.contains('popup_open');
+
+  //add or remove popup_open on modal
+  modal.classList.toggle('popup_open');
+
+  //assign modal to openedModal, which will be used by handle functions
+  openedModal = modal;
+
+  //handle overlay click and Esc Keydown on form open and close
+  if(isModalOpen) {
+    // remove listerners on overlay
+    modal.removeEventListener('click', handleOverlayClick, true);
+    // remove listerners on window for ESC key
+    window.removeEventListener("keydown", handleEscKeyPess, true);
+
+    //reset openedModal value to null
+    openedModal = modal;
+  } else {
+    //add listener to hide a popup form by clicking on overlay
+    modal.addEventListener('click', handleOverlayClick, true);
+    //add listener to hide a popup form with ESC key
+    window.addEventListener("keydown", handleEscKeyPess, true);
+  }
 }
 //change like button state on click
 function changeLikeButton(event) {
@@ -71,7 +79,7 @@ function formSubmitHandler(event) {
   event.preventDefault();
   profileName.textContent = nameInput.value;
   profileDescription.textContent = descriptionInput.value;
-  closeForm(editProfileModal);
+  toggleModal(editProfileModal);
 }
 //function to add a card to gallery
 function addCard(cardTitle, cardLink) {
@@ -103,14 +111,14 @@ function addCard(cardTitle, cardLink) {
     imagePopup.src = cardLink;
     imagePopup.alt = cardTitle;
     imageCaptionPopup.textContent = cardTitle;
-    openForm(imageOpenModal);
+    toggleModal(imageOpenModal);
     // close popup image
     closePopupImage.addEventListener('click', () => {
-      closeForm(imageOpenModal);
+      toggleModal(imageOpenModal);
     });
   });
 
-  closeForm(imageOpenModal);
+  toggleModal(imageOpenModal);
 }
 
 /* handle user interactions */
@@ -123,11 +131,11 @@ editProfileButton.addEventListener('click', () => {
     nameInput.value = profileName.textContent;
     descriptionInput.value = profileDescription.textContent;
   }
-  openForm(editProfileModal);
+  toggleModal(editProfileModal);
 });
 
 closeEditProfile.addEventListener('click', () => {
-  closeForm(editProfileModal);
+  toggleModal(editProfileModal);
 });
 
 editProfileModal.addEventListener('submit', formSubmitHandler);
@@ -136,12 +144,12 @@ editProfileModal.addEventListener('submit', formSubmitHandler);
 
 /* JS Code for add button */
 addCardButton.addEventListener('click', () => {
-  openForm(addCardModal);
+  toggleModal(addCardModal);
 });
 
 closeAddCardForm.addEventListener('click', () => {
   addForm.reset();
-  closeForm(addCardModal);
+  toggleModal(addCardModal);
 });
 
 //initial values of cards in gallery
