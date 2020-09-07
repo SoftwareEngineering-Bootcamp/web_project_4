@@ -106,7 +106,7 @@ const handleExpandImage = (data) => {
 //handle Escape keydown
 const handleEscKeyPress = (event) => {
   event.preventDefault();
-  const openedModal = document.querySelector('.popup__open');
+  const openedModal = document.querySelector('.popup_open');
 
   if(event.which === ESC_KEYCODE) {
     handleCloseModal(openedModal);
