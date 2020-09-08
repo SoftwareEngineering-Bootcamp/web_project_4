@@ -1,7 +1,11 @@
-# Project 4, 5 & 6: Around The U.S.
+# Project Around The U.S.
+
+# Project 4, 5, 6 & 7 from Praticum by Yandex Web Dev course
 
 ## My first project using JavaScript
 * [My project is accessible here](https://abra-sena.github.io/web_project_4/)
+
+## This is a project breakdown in small pieces through the coursevto cover different aspects. In project 7, our focus will be on applying JavaScript object oriented structure, interfaces and modular to the existing.
 
 ### Description
 
@@ -15,7 +19,12 @@
 
 ### Functionality
 
-**Project 6**
+**Project 7: Organize project, Refactoring**
+
+* Break code into modules
+* Create classes for card and form validator.
+
+**Project 6: Form Validation**
 * Create a separate script file, *validate.js*, to handle _form validation_ of profile-edit and add-card forms.
 * Add event listeners to window to allow user to use *Esc Key* to close any popup window.
 * Add event listeners to window to allow user to close any popup window by clicking on the overlay.

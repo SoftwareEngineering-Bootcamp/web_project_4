@@ -35,7 +35,7 @@ const toggleButtonState = (inputs, button, inactiveButtonClass) => {
 }
 
 const setEventListeners = (form, settings) => {
-  const inputs = [...form.querySelectorAll(settings.inputSelector)];
+  const inputs = Array.from(form.querySelectorAll(settings.inputSelector));
   const button = form.querySelector(settings.submitButtonSelector);
 
   inputs.forEach((input) => {
@@ -47,7 +47,7 @@ const setEventListeners = (form, settings) => {
 }
 
 const enableValidation = (settings) => {
-  const forms = [...document.querySelectorAll(settings.formSelector)];
+  const forms = Array.from(document.querySelectorAll(settings.formSelector));
 
   forms.forEach((form) => {
     form.addEventListener('submit', (evt) => {

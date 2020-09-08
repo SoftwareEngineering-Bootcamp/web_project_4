@@ -1,4 +1,29 @@
-const ESC_KEYCODE = 27;
+import FormValidator from './FormValidator.js';
+import Card from './Card.js';
+import {imageOpenModal, handleOpenModal, handleCloseModal} from './utils.js';
+
+const defaultSettings = {
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__submit",
+  inactiveButtonClass: "form__submit_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible"
+};
+
+//wrappers
+const addCardModal = document.querySelector('.popup_type_add-card');
+const editProfileModal = document.querySelector('.popup_type_edit-profile');
+const addCardForm = addCardModal.querySelector('.popup__form');
+const editProfileForm = editProfileModal.querySelector('.popup__form');
+
+//instances of form validator
+const addCardValidator = new FormValidator(defaultSettings, addCardForm);
+const editFormValidator = new FormValidator(defaultSettings, editProfileForm);
+
+addCardValidator.enableValidation();
+editFormValidator.enableValidation();
+
 //initial values of cards in gallery
 const initialCards = [
   {
@@ -27,19 +52,10 @@ const initialCards = [
   }
 ];
 
-//wrappers
-const addCardModal = document.querySelector('.popup_type_add-card');
-const editProfileModal = document.querySelector('.popup_type_edit-profile');
-const imageOpenModal = document.querySelector('.popup_type_image');
 
-//open buttons
+//open form buttons
 const addCardButton = document.querySelector('.add-button');
 const editProfileButton = document.querySelector('.profile__edit');
-
-//close buttons
-const closeAddCardForm = addCardModal.querySelector('.form__close-button');
-const closeEditProfile = editProfileModal.querySelector('.form__close-button');
-const closePopupImage = imageOpenModal.querySelector('.popup__close');
 
 //form inputs
 const nameInput = document.querySelector('.form__input_type_name');
@@ -49,77 +65,12 @@ const cardUrlInput = document.querySelector('.form__input_type_card-url');
 
 //other DOM elements
 const addForm = document.forms.add;
-const cardTemplate = document.querySelector('.element').content.querySelector('.element__item');
 const cardList = document.querySelector('.elements__list');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
-const imagePopup = imageOpenModal.querySelector('.popup__image');
-const imageCaptionPopup = imageOpenModal.querySelector('.popup__image-caption');
 
 /*functions*/
 
-//function to add a card to gallery
-const getCardElements = (data)=> {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardLikeButton = cardElement.querySelector('.element__like');
-  const deleteCard = cardElement.querySelector('.element__delete');
-  const expandCard = cardElement.querySelector('.element__photo');
-
-  cardElement.querySelector('.element__name').textContent = data.name;
-  expandCard.style.backgroundImage = `url("${data.link}")`;
-
-  //cardList.prepend(cardElement);
-
-  //change like button style on click
-  cardLikeButton.addEventListener('click', changeLikeButton);
-  //delete card from gallery
-  deleteCard.addEventListener("click", removeCard);
-  //expand card on full screen
-  expandCard.addEventListener("click", () => handleExpandImage(data));
-
-  return cardElement;
-};
-//open modal on click
-const handleOpenModal = (modal) => {
-  modal.classList.add('popup_open');
-  //add listener to hide a popup form with ESC key
-  document.addEventListener("keyup", handleEscKeyPress, true);
-};
-//close modal on click
-const handleCloseModal = (modal) => {
-  modal.classList.remove('popup_open');
-  // remove listerners on window for ESC key
-  document.removeEventListener("keyup", handleEscKeyPress, true);
-}
-
-const renderCard = (data, wrap) => {
-  wrap.prepend(getCardElements(data));
-};
-
-//expand card on full screen
-const handleExpandImage = (data) => {
-  imagePopup.src = data.link;
-  imagePopup.alt = `place-${data.name}`;
-  imageCaptionPopup.textContent = data.name;
-  handleOpenModal(imageOpenModal);
-};
-//handle Escape keydown
-const handleEscKeyPress = (event) => {
-  event.preventDefault();
-  const openedModal = document.querySelector('.popup_open');
-
-  if(event.which === ESC_KEYCODE) {
-    handleCloseModal(openedModal);
-  }
-};
-//change like button state on click
-const changeLikeButton = (event) => {
-  event.target.classList.toggle('element__like_active');
-};
-//delete an element from gallery
-const removeCard = (event) => {
-  event.target.closest('.element__item').remove();
-};
 //save user input on edit profile
 const editFormSubmitHandler = (event) => {
   event.preventDefault();
@@ -130,14 +81,15 @@ const editFormSubmitHandler = (event) => {
 //save user input on edit profile
 const cardFormSubmitHandler = (event) => {
   event.preventDefault();
+  const addedCard = new Card(
+    {name: cardNameInput.value,
+    link: cardUrlInput.value}, '.element');
 
-  renderCard({
-    name: cardNameInput.value,
-    link: cardUrlInput.value
-  }, cardList);
+  cardList.prepend(addedCard.getCardElements());
   addForm.reset();
   handleCloseModal(addCardModal);
 }
+
 /* handle user interactions */
 
 addCardModal.addEventListener('submit', cardFormSubmitHandler);
@@ -155,25 +107,29 @@ editProfileButton.addEventListener('click', () => {
   handleOpenModal(editProfileModal);
 });
 
+//close modal with click on overlay or close button
 addCardModal.addEventListener('click', (event) => {
-
   if(event.target.classList.contains('popup') || event.target.classList.contains('form__close-button')) {
     handleCloseModal(addCardModal);
   }
 });
-editProfileModal.addEventListener('click', () => {
+editProfileModal.addEventListener('click', (event) => {
   if(event.target.classList.contains('popup') || event.target.classList.contains('form__close-button')) {
     handleCloseModal(editProfileModal);
   }
 });
-imageOpenModal.addEventListener('click', () => {
+imageOpenModal.addEventListener('click', (event) => {
   if(event.target.classList.contains('popup') || event.target.classList.contains('popup__close')) {
     handleCloseModal(imageOpenModal);
   }
 });
 
 
-//render first 6 cards to gallery
+//create instances for each of thef first 6 cards and render them to gallery
 initialCards.forEach((data) => {
-  renderCard(data, cardList);
+  const initialCard = new Card(
+    {name: data.name,
+    link: data.link}, '.element');
+
+  cardList.prepend(initialCard.getCardElements());
 });
