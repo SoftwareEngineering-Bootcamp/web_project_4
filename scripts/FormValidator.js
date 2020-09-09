@@ -5,18 +5,18 @@ class FormValidator {
   }
 
   _showErrorMessage() {
-    const error = this._formElement.querySelector(`#${input.id}-error`);
+    const error = this._formElement.querySelector(`#${this._settings.inputSelector.id}-error`);
 
-    error.textContent = input.validationMessage;
+    error.textContent = this._settings.inputSelector.validationMessage;
     error.classList.add(this._settings.errorClass);
-    input.classList.add(this._settings.inputErrorClass);
+    this._settings.inputSelector.classList.add(this._settings.inputErrorClass);
   }
   _hideErrorMessage() {
-    const error = this._formElement.querySelector(`#${input.id}-error`);
+    const error = this._formElement.querySelector(`#${this._settings.inputSelector.id}-error`);
 
     error.textContent = '';
     error.classList.remove(this._settings.errorClass);
-    input.classList.remove(this._settings.inputErrorClass);
+    this._settings.inputSelector.classList.remove(this._settings.inputErrorClass);
   }
   _checkInputValidity(form, input, errorClass, inputErrorClass) {
     if(input.validity.valid) {
@@ -43,7 +43,7 @@ class FormValidator {
     inputList.forEach((input) => {
       input.addEventListener('input', () => {
         this._checkInputValidity();
-        thi._toggleButtonState();
+        this._toggleButtonState();
       });
     });
   }

@@ -1,5 +1,4 @@
-import {imageOpenModal, imagePopup, imageCaptionPopup} from './utils.js';
-import {handleOpenModal} from './utils.js';
+import {handleOpenModal, imageOpenModal, imagePopup, imageCaptionPopup} from './utils.js';
 
 
 class Card {
