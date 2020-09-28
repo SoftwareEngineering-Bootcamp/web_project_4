@@ -1,6 +1,6 @@
 # Project Around The U.S.
 
-# Project 4, 5, 6 & 7 from Praticum by Yandex Web Dev course
+# Project 4, 5, 6, 7 & 8 from Praticum by Yandex Web Dev course
 
 ## My first project using JavaScript
 * [My project is accessible here](https://abra-sena.github.io/web_project_4/)
@@ -18,6 +18,15 @@
 * Form validation and event handling.
 
 ### Functionality
+
+**Project 8: Refactoring, Project bundling and building with Webpack**
+* Project building with Webpack
+* Used npm to intall webpack and it commandline interface
+* Install live server as a dependency inside project and integrated with Webpack
+* Install Babel, JS transpiller which webpack will use in the build process
+* Install modules for CSS (Webpack plugin)
+* CSS Minification and Autoprefixing
+
 
 **Project 7: Organize project, Refactoring**
 

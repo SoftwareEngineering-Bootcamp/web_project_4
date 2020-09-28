@@ -2,9 +2,10 @@ import {handleOpenModal, imageOpenModal, imagePopup, imageCaptionPopup} from './
 
 
 class Card {
-  constructor(data, cardTemplateSelector) {
+  constructor({data, handleCardClick}, cardTemplateSelector) {
     this._name = data.name;
     this._link = data.link;
+    this._handleCardClick = handleCardClick;
     this._cardTemplate = document.querySelector(cardTemplateSelector)
         .content.querySelector('.element__item');
   }

@@ -1,3 +1,24 @@
+import "../page/index.css";
+import yosemiteImage from "../images/element_yosemite.png";
+import lakeLouiseImage from "../images/element_lake-louise.png"
+import baldMountainsImage from "../images/element_bald-mountains.png";
+import latemarImage from "../images/element_latemar.png";
+import vanoiseParkImage from "../images/element_vanoise.png";
+import lagoDiBraiesImage from "../images/element_lago-di-braies.png";
+
+console.log("abravi");
+
+//initial values of cards in gallery
+const initialCards = [
+  { name: "Yosemite Valley", link: yosemiteImage },
+  { name: "Lake Louise", link: lakeLouiseImage },
+  { name: "Bald Mountains", link: baldMountainsImage },
+  { name: "Latemar", link: latemarImage  },
+  { name: "Vanoise National Park", link: vanoiseParkImage },
+  { name: "Lago di Braies", link: lagoDiBraiesImage }
+];
+
+
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
 import {imageOpenModal, handleOpenModal, handleCloseModal} from './utils.js';
@@ -24,33 +45,6 @@ const editFormValidator = new FormValidator(defaultSettings, editProfileForm);
 addCardValidator.enableValidation();
 editFormValidator.enableValidation();
 
-//initial values of cards in gallery
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
-  },
-  {
-    name: "Lake Louise",
-    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
-  },
-  {
-    name: "Latemar",
-    link: "https://code.s3.yandex.net/web-code/latemar.jpg"
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://code.s3.yandex.net/web-code/vanoise.jpg"
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://code.s3.yandex.net/web-code/lago.jpg"
-  }
-];
 
 
 //open form buttons
@@ -133,3 +127,5 @@ initialCards.forEach((data) => {
 
   cardList.prepend(initialCard.getCardElements());
 });
+
+
