@@ -1,52 +1,56 @@
-import {handleOpenModal, imageOpenModal, imagePopup, imageCaptionPopup} from './utils.js';
+import { cardLikeButton, deleteCard, imagePopup, imageCaption } from './utils.js';
 
 
 class Card {
-  constructor({data, handleCardClick}, cardTemplateSelector) {
+  constructor({data, handleCardClick}, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._handleCardClick = handleCardClick;
-    this._cardTemplate = document.querySelector(cardTemplateSelector)
-        .content.querySelector('.element__item');
+    this._cardSelector = cardSelector;
   }
 
-  _changeLikeButton(event) {
-    event.target.classList.toggle('element__like_active');
+  _getTemplate() {
+    const cardElement = document.querySelector(this._cardSelector).
+          content.querySelector('.element__item').cloneNode(true);
+
+          return cardElement;
   }
 
-  _removeCard(event) {
-    event.target.closest('.element__item').remove();
+  _changeLikeButton() {
+    this._element.querySelector('.element__like').classList.toggle('element__like_active');
+  }
+
+  _removeCard() {
+    this._element.remove();
+    this._element = null;
   }
 
   _handleExpandImage() {
     imagePopup.src = this._link;
-    imagePopup.alt = `place-${this._name}`;
-    imageCaptionPopup.textContent = this._name;
-    handleOpenModal(imageOpenModal);
+    imagePopup.alt = this._link;
+    imageCaption.textContent = this._name;
+    //document.addEventListener('keydown', handleEscClose);
   }
 
-  _addEventListeners() {
-    const cardLikeButton = this._card.querySelector('.element__like');
-    const deleteCard = this._card.querySelector('.element__delete');
-    const expandCard = this._card.querySelector('.element__photo');
-
+  _setEventListeners() {
     //change like button style on click
-    cardLikeButton.addEventListener('click', this._changeLikeButton);
+    this._element.querySelector('.element__like').addEventListener('click', () => this._changeLikeButton());
     //delete card from gallery
-    deleteCard.addEventListener("click", this._removeCard);
+    this._element.querySelector('.element__delete').addEventListener("click", () => this._removeCard());
     //expand card on full screen
-    expandCard.addEventListener("click", () => this._handleExpandImage());
+    this._element.querySelector('.element__photo').addEventListener("click", () => this._handleCardClick());
   }
 
   getCardElements() {
-    this._card = this._cardTemplate.cloneNode(true);
-    const expandCard = this._card.querySelector('.element__photo');
+    this._element = this._getTemplate();
 
-    this._card.querySelector('.element__name').textContent = this._name;
-    expandCard.style.backgroundImage = `url("${this._link}")`;
+    this._element.querySelector('.element__photo').style.backgroundImage = `url("${this._link}")`;
+    this._element.querySelector('.element__name').textContent = this._name;
+    this._element.querySelector('.element__photo').setAttribute('alt', this._name);
 
-    this._addEventListeners();
-    return this._card;
+    this._setEventListeners();
+
+    return this._element;
   };
 }
 

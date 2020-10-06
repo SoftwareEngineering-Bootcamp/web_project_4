@@ -1,6 +1,6 @@
-import Popup from "./Popup";
+import Popup from "./Popup.js";
 
-class PopupWithImage extends Popup {
+export default class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
   }
@@ -10,6 +10,9 @@ class PopupWithImage extends Popup {
     this._popupElement.querySelector('.popup__image-caption').textContent = caption;
     super.open();
   }
+
+  setEventListeners() {
+    this.setEventListeners(); //call from parent class
+  }
 }
 
-export default PopupWithImage;
