@@ -16,18 +16,14 @@ export default class Popup {
   }
 
   _handleEscClose(event) {
-    console.log(4);
     if(event.which === '27') {
       this.close();
     }
   }
 
   setEventListeners() {
-    console.log(1);
     this._popupElement.addEventListener('click', (event) => {
-      console.log(2);
-      if(event.target.classList.contains('popup') || event.target.classList.contains('form__close-button')) {
-        console.log(3);
+      if(event.target.classList.contains('popup') || event.target.classList.contains('popup__close')) {
         this.close();
       }
     });

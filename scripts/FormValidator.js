@@ -1,38 +1,38 @@
-class FormValidator {
+export default class FormValidator {
   constructor(settings, formElement) {
     this._settings = settings;
-    this._formElement = formElement;
+    this._formElement = document.querySelector(formElement);
   }
 
-  _showErrorMessage() {
-    const error = this._formElement.querySelector(`#${this._settings.inputSelector.id}-error`);
+  _showErrorMessage(input) {
+    const error = this._formElement.querySelector(`#${input.id}-error`);
 
     error.textContent = this._settings.inputSelector.validationMessage;
     error.classList.add(this._settings.errorClass);
     this._settings.inputSelector.classList.add(this._settings.inputErrorClass);
   }
-  _hideErrorMessage() {
-    const error = this._formElement.querySelector(`#${this._settings.inputSelector.id}-error`);
+  _hideErrorMessage(input) {
+    const error = this._formElement.querySelector(`#${input.id}-error`);
 
     error.textContent = '';
     error.classList.remove(this._settings.errorClass);
     this._settings.inputSelector.classList.remove(this._settings.inputErrorClass);
   }
-  _checkInputValidity(form, input, errorClass, inputErrorClass) {
+  _checkInputValidity(input) {
     if(input.validity.valid) {
-      this._hideErrorMessage();
+      this._hideErrorMessage(input);
     } else {
-      this._showErrorMessage();
+      this._showErrorMessage(input);
     }
   }
-  _toggleButtonState(inputs, button, inactiveButtonClass) {
+  _toggleButtonState(inputs, button) {
     const isValid = inputs.every((input) => input.validity.valid);
 
     if(isValid) {
-      button.classList.remove(inactiveButtonClass);
+      button.classList.remove(this._settings.inactiveButtonClass);
       button.classList.remove('form__submit_disabled');
     } else {
-      button.classList.add(inactiveButtonClass);
+      button.classList.add(this._settings.inactiveButtonClass);
       button.classList.add('form__submit_disabled');
     }
   }
@@ -42,8 +42,8 @@ class FormValidator {
 
     inputList.forEach((input) => {
       input.addEventListener('input', () => {
-        this._checkInputValidity();
-        this._toggleButtonState();
+        this._checkInputValidity(input);
+        this._toggleButtonState(inputList, button);
       });
     });
   }
@@ -57,4 +57,3 @@ class FormValidator {
   }
 }
 
-export default FormValidator;

@@ -1,23 +1,20 @@
-import { cardLikeButton, deleteCard, imagePopup, imageCaption } from './utils.js';
-
-
-class Card {
-  constructor({data, handleCardClick}, cardSelector) {
-    this._name = data.name;
-    this._link = data.link;
+export default class Card {
+  constructor({title, link, handleCardClick}, cardSelector) {
+    this._title = title;
+    this._link = link;
     this._handleCardClick = handleCardClick;
     this._cardSelector = cardSelector;
   }
 
   _getTemplate() {
-    const cardElement = document.querySelector(this._cardSelector).
+    const cardElement = document.querySelector('.element').
           content.querySelector('.element__item').cloneNode(true);
 
           return cardElement;
   }
 
   _changeLikeButton() {
-    this._element.querySelector('.element__like').classList.toggle('element__like_active');
+    this._likeButton.classList.toggle('element__like_active');
   }
 
   _removeCard() {
@@ -25,28 +22,25 @@ class Card {
     this._element = null;
   }
 
-  _handleExpandImage() {
-    imagePopup.src = this._link;
-    imagePopup.alt = this._link;
-    imageCaption.textContent = this._name;
-    //document.addEventListener('keydown', handleEscClose);
-  }
-
   _setEventListeners() {
     //change like button style on click
-    this._element.querySelector('.element__like').addEventListener('click', () => this._changeLikeButton());
+    this._likeButton.addEventListener('click', () => this._changeLikeButton());
     //delete card from gallery
-    this._element.querySelector('.element__delete').addEventListener("click", () => this._removeCard());
+    this._deleteButton.addEventListener("click", () => this._removeCard());
     //expand card on full screen
-    this._element.querySelector('.element__photo').addEventListener("click", () => this._handleCardClick());
+    this._cardImage.addEventListener("click", () => this._handleCardClick());
   }
 
   getCardElements() {
     this._element = this._getTemplate();
+    this._cardImage = this._element.querySelector('.element__photo');
+    this._cardTitle = this._element.querySelector('.element__name');
+    this._likeButton = this._element.querySelector('.element__like');
+    this._deleteButton = this._element.querySelector('.element__delete');
 
-    this._element.querySelector('.element__photo').style.backgroundImage = `url("${this._link}")`;
-    this._element.querySelector('.element__name').textContent = this._name;
-    this._element.querySelector('.element__photo').setAttribute('alt', this._name);
+    this._cardImage.src = this._link;
+    this._cardImage.setAttribute("alt", this._title);
+    this._cardTitle.textContent = this._title;
 
     this._setEventListeners();
 
@@ -54,4 +48,3 @@ class Card {
   };
 }
 
-export default Card;

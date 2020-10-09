@@ -1,22 +1,24 @@
-import { nameInput, descriptionInput, profileName, profileDescription } from './utils';
+import { profileName, profileDescription } from './utils';
 
 export default class UserInfo {
   constructor(name, job) {
-    this._name = name;
-    this._job = job;
+    this._name = document.querySelector(name).value;
+    this._job = document.querySelector(job).value;
+    this._profileName = profileName;
+    this._profileDescription = profileDescription;
   }
 
   getUserInfo() {
-    let userDetails = {
-      name: nameInput,
-      job: descriptionInput
+    this._userDetails = {
+      name: this._name,
+      job: this._job
     }
 
-    return userDetails;
+    return this._userDetails;
   }
 
   setUserInfo() {
-    profileName.textContent = this.userDetails.name;
-    profileDescription.textContent = this.userDetails.job;
+    this._profileName.textContent = this._userDetails.name;
+    this._profileDescription.textContent = this._userDetails.job;
   }
 }

@@ -1,12 +1,18 @@
 import Popup from "./Popup.js";
-//import UserInfo from './UserInfo';
-
-import { nameInput, descriptionInput, cardNameInput, cardUrlInput, profileName, profileDescription } from './utils';
+import { descriptionInput, nameInput, profileName, profileDescription } from './utils';
 
 export default class PopupWithForm extends Popup{
-  constructor(popupSelector) {
+  constructor({popupSelector, handleFormSubmit}) {
     super(popupSelector);
+    this._handleFormSubmit = handleFormSubmit;
     this._forms = document.querySelector('.popup');
+  }
+
+  open() {
+    super.open();
+    //populate imput values
+    descriptionInput.value = profileDescription.textContent;
+    nameInput.value = profileName.textContent;
   }
 
   close() {
@@ -17,30 +23,24 @@ export default class PopupWithForm extends Popup{
   _getInputValues() {
     this._formInput = this._popupElement.querySelectorAll('.form__input');
 
-    if(popupSelector === document.querySelector('.popup_type_add-card')) {
-      this._formInput = (event) => { // can I do this ?
-        event.preventDefault();
-        profileName.textContent = nameInput.value;
-        profileDescription.textContent = descriptionInput.value;
-      }
-    }
-    if(popupSelector === document.querySelector('.popup_type_add-profile')) {
-      this._formInput = (event) => {
-        event.preventDefault();
-        //to we get any input for add card popup from here?
-      }
-    }
+    //get the imputs as an array
+    this._inputs = {};
+    this._formInput.forEach(
+      (input) => (this._inputs[input.name] = input.value)
+    );
 
-    return this._formInput;
+    return this._inputs;
   }
 
   setEventListeners() {
+    super.setEventListeners(); //call from parent class
+
     //add the submit handler for the forms
-    this._popupElement.addEventListener('submit', (event) => {
+    this._popupElement.addEventListener("submit", (event) => {
       event.preventDefault();
-      this._getInputValues
+      this._handleFormSubmit(this._getInputValues());
+      this.close();
     });
 
-    this.setEventListeners(); //call from parent class
   }
 }
