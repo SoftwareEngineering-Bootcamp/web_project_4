@@ -7,18 +7,18 @@ export default class PopupWithImage extends Popup {
     this._popupCaption = document.querySelector('.popup__image-caption');
   }
 
-  open(title, link) {
+  open(name, link) {
+    super.open(name, link);
     this._popupImage.src = link;
-    this.__popupImage.setAttribute('alt', title);
-    this._popupCaption.textContent = title;
-    super.open();
+    this.__popupImage.alt = name;
+    this._popupCaption.textContent = name;
   }
 
   close() {
-    this._popupImage.src = "";
-    this.__popupImage.setAttribute('alt', "");
-    this._popupCaption.textContent = "";
     super.close();
+    this._popupImage.src = "";
+    this.__popupImage.alt = "";
+    this._popupCaption.textContent = "";
   }
 
   setEventListeners() {

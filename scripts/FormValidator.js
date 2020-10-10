@@ -4,25 +4,30 @@ export default class FormValidator {
     this._formElement = document.querySelector(formElement);
   }
 
-  _showErrorMessage(input) {
-    const error = this._formElement.querySelector(`#${input.id}-error`);
+  _showErrorMessage() {
+    const error = this._formElement.querySelector(`#${this._settings.inputSelector.id}-error`);
+    console.log("1: "+ error);
 
     error.textContent = this._settings.inputSelector.validationMessage;
+    console.log("2: " + error);
     error.classList.add(this._settings.errorClass);
     this._settings.inputSelector.classList.add(this._settings.inputErrorClass);
   }
-  _hideErrorMessage(input) {
-    const error = this._formElement.querySelector(`#${input.id}-error`);
+  _hideErrorMessage() {
+    const error = this._formElement.querySelector(`#${this._settings.inputSelector.id}-error`);
 
-    error.textContent = '';
+    console.log("3: "+ error);
+    error.textContent = "";
+    console.log("4: " + error);
+
     error.classList.remove(this._settings.errorClass);
     this._settings.inputSelector.classList.remove(this._settings.inputErrorClass);
   }
   _checkInputValidity(input) {
     if(input.validity.valid) {
-      this._hideErrorMessage(input);
+      this._hideErrorMessage();
     } else {
-      this._showErrorMessage(input);
+      this._showErrorMessage();
     }
   }
   _toggleButtonState(inputs, button) {

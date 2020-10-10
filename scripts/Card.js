@@ -1,6 +1,6 @@
 export default class Card {
-  constructor({title, link, handleCardClick}, cardSelector) {
-    this._title = title;
+  constructor({name, link, handleCardClick}, cardSelector) {
+    this._title = name;
     this._link = link;
     this._handleCardClick = handleCardClick;
     this._cardSelector = cardSelector;
@@ -39,7 +39,7 @@ export default class Card {
     this._deleteButton = this._element.querySelector('.element__delete');
 
     this._cardImage.src = this._link;
-    this._cardImage.setAttribute("alt", this._title);
+    this._cardImage.alt = this._title;
     this._cardTitle.textContent = this._title;
 
     this._setEventListeners();

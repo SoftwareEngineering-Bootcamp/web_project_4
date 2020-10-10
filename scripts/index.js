@@ -28,6 +28,9 @@ const initialCards = [
 //instances of form validator for edit-profile and add-card
 const addCardValidator = new FormValidator(defaultSettings, '.form_add-card');
 const editFormValidator = new FormValidator(defaultSettings, '.form_edit-profile');
+//validate forms (edit-profile and add-card)
+addCardValidator.enableValidation();
+editFormValidator.enableValidation();
 
 //preview a photo
 const imageOpenModal = new PopupWithImage('.popup_type_image');
@@ -36,11 +39,13 @@ const imageOpenModal = new PopupWithImage('.popup_type_image');
 const defaultCardList = new Section(
   {
     item: initialCards,
-    renderer: (name, link) => {
+    renderer: ({name, link}) => {
       //create instances of card
       const card = new Card(
         {
-          initialCards, handleCardClick: () => imageOpenModal.open(name, link)
+          name,
+          link,
+          handleCardClick: () => imageOpenModal.open(name, link)
         },
         '.element'
       );
@@ -55,10 +60,12 @@ const defaultCardList = new Section(
 //add-card to gallery form
 const addCardModal = new PopupWithForm({
   popupSelector: '.popup_type_add-card',
-  handleFormSubmit: (name, link) => {
+  handleFormSubmit: ({name, link}) => {
     const addedCard = new Card(
     {
-      name, link, handleCardClick: () => imageOpenModal.open(name, link)
+      name,
+      link,
+      handleCardClick: () => imageOpenModal.open(name, link)
     },
     '.element');
 
@@ -80,14 +87,15 @@ const editProfileModal = new PopupWithForm({
   }
 });
 
+// add listeners for edit-icon and add-icon
+document.querySelector('.profile__edit').addEventListener('click', () => editProfileModal.open());
+document.querySelector('.add-button').addEventListener('click', () => addCardModal.open());
+
+
 //render cards to the page
 defaultCardList.rendererItems();
-
-/** Event listerners on forms*/
-editProfileModal.setEventListeners();
-addCardModal.setEventListeners();
+//set event listeners on popup
+editProfileModal.generateForm();
+addCardModal.generateForm();
 imageOpenModal.setEventListeners();
 
-//validate forms (edit-profile and add-card)
-addCardValidator.enableValidation();
-editFormValidator.enableValidation();

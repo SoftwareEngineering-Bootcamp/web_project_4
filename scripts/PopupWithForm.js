@@ -5,7 +5,15 @@ export default class PopupWithForm extends Popup{
   constructor({popupSelector, handleFormSubmit}) {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
-    this._forms = document.querySelector('.popup');
+    this._addForm = document.querySelector('.form_edit-profile');
+    this._editForm = document.querySelector('.form_add-card');
+  }
+
+  _getTemplate() {
+    const cardElement = document.querySelector('.element').
+          content.querySelector('.element__item').cloneNode(true);
+
+          return cardElement;
   }
 
   open() {
@@ -17,7 +25,8 @@ export default class PopupWithForm extends Popup{
 
   close() {
     super.close();
-    this._forms.reset();
+    this._addForm.reset();
+    this._editForm.reset();
   }
 
   _getInputValues() {
@@ -41,6 +50,11 @@ export default class PopupWithForm extends Popup{
       this._handleFormSubmit(this._getInputValues());
       this.close();
     });
+  }
+  generateForm() {
+    this._element = this._getTemplate;
+    this.setEventListeners;
 
+    return this._element;
   }
 }
