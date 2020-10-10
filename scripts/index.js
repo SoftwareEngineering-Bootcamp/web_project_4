@@ -59,12 +59,9 @@ const addCardModal = new PopupWithForm({
   popupSelector: '.popup_type_add-card',
   handleFormSubmit: ({name, link}) => {
     const addedCard = new Card(
-    {
-      name,
-      link,
-      handleCardClick: () => imageOpenModal.open(name, link)
-    },
-    '.element');
+      { name, link, handleCardClick: () => imageOpenModal.open(name, link) },
+      '.element'
+    );
 
     const cardElement = addedCard.getCardElements();
     defaultCardList.addItem(cardElement);
@@ -73,15 +70,12 @@ const addCardModal = new PopupWithForm({
 
 //edit-profile form
 const editProfileModal = new PopupWithForm({
-  popupSelector: '.popup_type_edit-profile',
+  popupSelector: ".popup_type_edit-profile",
   handleFormSubmit: () => {
-    const profile = new UserInfo(
-      { nameInput: '.form__input_type_name' },
-      { descriptionInput: 'form__input_type_description' }
-    );
+    const profile = new UserInfo(".form__input_type_name", ".form__input_type_description");
     profile.getUserInfo();
     profile.setUserInfo();
-  }
+  },
 });
 
 // add listeners for edit-icon and add-icon

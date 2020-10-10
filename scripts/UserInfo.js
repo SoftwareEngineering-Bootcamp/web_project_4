@@ -2,8 +2,8 @@ import { profileName, profileDescription } from './utils';
 
 export default class UserInfo {
   constructor(name, job) {
-    this._name = name.value;
-    this._job = job.value;
+    this._name = document.querySelector(name).value;
+    this._job = document.querySelector(job).value;
     this._profileName = profileName;
     this._profileDescription = profileDescription;
   }

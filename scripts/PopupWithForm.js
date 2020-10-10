@@ -1,4 +1,4 @@
-import Popup from "./Popup.js";
+import Popup from "./Popup";
 import { descriptionInput, nameInput, profileName, profileDescription } from './utils';
 
 export default class PopupWithForm extends Popup{
@@ -22,27 +22,25 @@ export default class PopupWithForm extends Popup{
     this._editForm.reset();
   }
 
-  _getInputValues() {
-    this._formInput = this._popupElement.querySelectorAll('.form__input');
-
-    //get the imputs as an array
-    this._inputValue = {};
-    this._formInput.forEach(
-      (input) => (this._inputs[input.details] = input.value)
-    );
-
-    return this._inputValue;
-  }
-
   setEventListeners() {
     super.setEventListeners(); //call from parent class
 
     //add the submit handler for the forms
     this._popupElement.addEventListener("submit", (event) => {
       event.preventDefault();
-      console.log(this._getInputValues());
       this._handleFormSubmit(this._getInputValues());
       this.close();
     });
+  }
+
+  _getInputValues() {
+    this._inputList = this._popupElement.querySelectorAll(".form__input");
+
+    this._formInputs = {};
+    this._inputList.forEach(
+      (input) => (this._formInputs[input.name] = input.value)
+    );
+
+    return this._formInputs;
   }
 }
