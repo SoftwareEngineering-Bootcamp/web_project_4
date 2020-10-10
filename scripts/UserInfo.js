@@ -20,7 +20,5 @@ export default class UserInfo {
   setUserInfo() {
     this._profileName.textContent = this._userDetails.name;
     this._profileDescription.textContent = this._userDetails.job;
-    console.log(this._profileName.textContent);
-    console.log(this._profileDescription.textContent);
   }
 }

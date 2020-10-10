@@ -28,9 +28,6 @@ const initialCards = [
 //instances of form validator for edit-profile and add-card
 const addCardValidator = new FormValidator(defaultSettings, '.form_add-card');
 const editFormValidator = new FormValidator(defaultSettings, '.form_edit-profile');
-//validate forms (edit-profile and add-card)
-addCardValidator.enableValidation();
-editFormValidator.enableValidation();
 
 //preview a photo
 const imageOpenModal = new PopupWithImage('.popup_type_image');
@@ -78,10 +75,10 @@ const addCardModal = new PopupWithForm({
 const editProfileModal = new PopupWithForm({
   popupSelector: '.popup_type_edit-profile',
   handleFormSubmit: () => {
-    const profile = new UserInfo({
-      nameInput: '.form__input_type_name',
-      descriptionInput: 'form__input_type_description'
-    });
+    const profile = new UserInfo(
+      { nameInput: '.form__input_type_name' },
+      { descriptionInput: 'form__input_type_description' }
+    );
     profile.getUserInfo();
     profile.setUserInfo();
   }
@@ -91,11 +88,14 @@ const editProfileModal = new PopupWithForm({
 document.querySelector('.profile__edit').addEventListener('click', () => editProfileModal.open());
 document.querySelector('.add-button').addEventListener('click', () => addCardModal.open());
 
-
 //render cards to the page
 defaultCardList.rendererItems();
+
 //set event listeners on popup
-editProfileModal.generateForm();
-addCardModal.generateForm();
+editProfileModal.setEventListeners();
+addCardModal.setEventListeners();
 imageOpenModal.setEventListeners();
 
+//validate forms (edit-profile and add-card)
+addCardValidator.enableValidation();
+editFormValidator.enableValidation();

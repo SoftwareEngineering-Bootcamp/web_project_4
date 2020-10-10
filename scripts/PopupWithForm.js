@@ -9,13 +9,6 @@ export default class PopupWithForm extends Popup{
     this._editForm = document.querySelector('.form_add-card');
   }
 
-  _getTemplate() {
-    const cardElement = document.querySelector('.element').
-          content.querySelector('.element__item').cloneNode(true);
-
-          return cardElement;
-  }
-
   open() {
     super.open();
     //populate imput values
@@ -33,12 +26,12 @@ export default class PopupWithForm extends Popup{
     this._formInput = this._popupElement.querySelectorAll('.form__input');
 
     //get the imputs as an array
-    this._inputs = {};
+    this._inputValue = {};
     this._formInput.forEach(
-      (input) => (this._inputs[input.name] = input.value)
+      (input) => (this._inputs[input.details] = input.value)
     );
 
-    return this._inputs;
+    return this._inputValue;
   }
 
   setEventListeners() {
@@ -47,14 +40,9 @@ export default class PopupWithForm extends Popup{
     //add the submit handler for the forms
     this._popupElement.addEventListener("submit", (event) => {
       event.preventDefault();
+      console.log(this._getInputValues());
       this._handleFormSubmit(this._getInputValues());
       this.close();
     });
-  }
-  generateForm() {
-    this._element = this._getTemplate;
-    this.setEventListeners;
-
-    return this._element;
   }
 }
