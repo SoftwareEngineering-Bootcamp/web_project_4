@@ -6,7 +6,7 @@ export default class Popup {
 
 
   _handleEscClose(event) {
-    if(event.which == 27) {
+    if(event.which === 27) {
       this.close();
     }
   }

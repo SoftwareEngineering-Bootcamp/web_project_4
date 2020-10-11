@@ -4,7 +4,7 @@
   "description": "# Project 4, 5, 6, 7 & 8 from Praticum by Yandex Web Dev course",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf dist && webpack",
+    "build": "rimraf -rf dist && webpack",
     "dev": "webpack-dev-server --open --watch"
   },
   "repository": {

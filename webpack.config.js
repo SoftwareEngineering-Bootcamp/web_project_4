@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: { main: "./src/scripts/index.js" },
+  entry: { main: "./src/pages/index.js" },
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "main.js"
@@ -30,6 +30,9 @@ module.exports = {
         test: /\.html$/,
         loader: "html-loader",
       },
+      /* as files with the specified extensions are not located in the same directory
+       * better to place images and fonts in separate folders
+      */
       {
         test: /\.(png|svg|jpg|gif|woff|woff2)$/,
         loader: "file-loader"

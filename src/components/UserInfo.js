@@ -1,4 +1,4 @@
-import { profileName, profileDescription } from './utils';
+import { profileName, profileDescription } from '../utils/utils';
 
 export default class UserInfo {
   constructor(name, job) {

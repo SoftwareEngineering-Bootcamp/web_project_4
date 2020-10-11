@@ -1,5 +1,5 @@
 import Popup from "./Popup";
-import { descriptionInput, nameInput, profileName, profileDescription } from './utils';
+import { descriptionInput, nameInput, profileName, profileDescription } from '../utils/utils';
 
 export default class PopupWithForm extends Popup{
   constructor({popupSelector, handleFormSubmit}) {
