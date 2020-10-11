@@ -57,9 +57,12 @@ const defaultCardList = new Section(
 //add-card to gallery form
 const addCardModal = new PopupWithForm({
   popupSelector: '.popup_type_add-card',
-  handleFormSubmit: ({name, link}) => {
+  handleFormSubmit: ({title, imageLink}) => {
     const addedCard = new Card(
-      { name, link, handleCardClick: () => imageOpenModal.open(name, link) },
+      { name: title,
+        link: imageLink,
+        handleCardClick: () => imageOpenModal.open(title, imageLink)
+      },
       '.element'
     );
 
@@ -79,15 +82,15 @@ const editProfileModal = new PopupWithForm({
 });
 
 // add listeners for edit-icon and add-icon
-document.querySelector('.profile__edit').addEventListener('click', () => editProfileModal.open());
 document.querySelector('.add-button').addEventListener('click', () => addCardModal.open());
+document.querySelector('.profile__edit').addEventListener('click', () => editProfileModal.open());
 
 //render cards to the page
 defaultCardList.rendererItems();
 
 //set event listeners on popup
-editProfileModal.setEventListeners();
 addCardModal.setEventListeners();
+editProfileModal.setEventListeners();
 imageOpenModal.setEventListeners();
 
 //validate forms (edit-profile and add-card)
