@@ -5,7 +5,7 @@
 ## My first project using JavaScript
 * [My project is accessible here](https://abra-sena.github.io/web_project_4/)
 
-## This is a project breakdown in small pieces through the coursevto cover different aspects. In project 7, our focus will be on applying JavaScript object oriented structure, interfaces and modular to the existing.
+## This is a project breakdown in small pieces through the course to cover different aspects. In project 8, I continue refactoring the page. More classes were created, each one is handling a unique task. All the classes are coupled together. At the end, I set up the project bundling and building with webpack.
 
 ### Description
 
@@ -20,12 +20,19 @@
 ### Functionality
 
 **Project 8: Refactoring, Project bundling and building with Webpack**
-* Project building with Webpack
-* Used npm to intall webpack and it commandline interface
-* Install live server as a dependency inside project and integrated with Webpack
-* Install Babel, JS transpiller which webpack will use in the build process
-* Install modules for CSS (Webpack plugin)
-* CSS Minification and Autoprefixing
+
+* Created the Section class for rendering a list of elements on a page.
+* Created the Popup class to open and close the popup window.
+* Created the PopupWithImage and PopupWithForm classes as child class of Popup.
+* Created the UserInfo class for rendering information about the user on the page.
+* Transformed the Card class by connecting it to the Popup.
+* Used npm to install webpack and its commandline interface.
+* Installed live server as a dependency inside project and integrated with Webpack.
+* Install Babel, JS transpiller which webpack will use in the build process.
+* Install modules for CSS (Webpack plugin).
+* CSS Minification and Autoprefixing.
+* Set up image and font processing.
+* Set up HTML processing so that everything works fine even with HTML code linking to local images.
 
 
 **Project 7: Organize project, Refactoring**
