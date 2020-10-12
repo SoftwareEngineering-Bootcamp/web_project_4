@@ -1,25 +1,15 @@
 import Popup from "./Popup";
-import { descriptionInput, nameInput, profileName, profileDescription } from '../utils/utils';
 
 export default class PopupWithForm extends Popup{
   constructor({popupSelector, handleFormSubmit}) {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
-    this._addForm = document.querySelector('.form_edit-profile');
-    this._editForm = document.querySelector('.form_add-card');
-  }
-
-  open() {
-    super.open();
-    //populate imput values
-    descriptionInput.value = profileDescription.textContent;
-    nameInput.value = profileName.textContent;
+    this._form = document.forms[0];
   }
 
   close() {
     super.close();
-    this._addForm.reset();
-    this._editForm.reset();
+    this._form.reset();
   }
 
   setEventListeners() {

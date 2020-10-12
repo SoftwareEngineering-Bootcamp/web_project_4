@@ -7,7 +7,7 @@ export default class Section {
   }
   //render each element on a page
   rendererItems() {
-    this._renderedElements.forEach((item) => this._renderer(item));
+    this._renderedElements.forEach(item => this._renderer(item));
   }
 
   //takes a DOM element and adds it to the container
