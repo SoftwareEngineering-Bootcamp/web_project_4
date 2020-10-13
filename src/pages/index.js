@@ -16,7 +16,7 @@ const editFormValidator = new FormValidator(defaultSettings, '.form_edit-profile
 const imageOpenModal = new PopupWithImage('.popup_type_image');
 
 //instances of card
-function addCard() {
+const addCard = ({name, link}) => {
   const card = new Card(
     { name,
       link,
@@ -26,22 +26,14 @@ function addCard() {
   );
 
   const cardElement = card.getCardElements();
-
-  return cardElement;
+  defaultCardList.addItem(cardElement);
 }
 
 //instance of section class
 const defaultCardList = new Section(
   {
     item: initialCards,
-    renderer: ({name, link}) => {
-      //create instances of card
-      const card = () => {
-        addCard(name, link)
-      }
-
-      defaultCardList.addItem(card);
-    }
+    renderer: ({name, link}) => addCard({name, link})
   },
   '.elements__list'
 );
@@ -49,32 +41,33 @@ const defaultCardList = new Section(
 //add-card to gallery form
 const addCardModal = new PopupWithForm({
   popupSelector: '.popup_type_add-card',
-  handleFormSubmit: ({title, imageLink}) => {
-    const addedCard = () => {
-      addCard({name: title}, {link: imageLink})
-    }
-
-    defaultCardList.addItem(addedCard);
-  }
+  handleFormSubmit: ({name, link}) => addCard({name, link})
 });
 
 const profile = new UserInfo(".form__input_type_name", ".form__input_type_description");
-profile.getUserInfo();
 
 //edit-profile form
 const editProfileModal = new PopupWithForm({
   popupSelector: ".popup_type_edit-profile",
   handleFormSubmit: () => {
+    //retreive and set inputs from profile
     profile.setUserInfo();
-  },
+    //collect inputs to display
+    profileDescription.textContent = descriptionInput.value;
+    profileName.textContent = nameInput.value;
+  }
 });
 
 // add listeners for edit-icon and add-icon
 document.querySelector('.add-button').addEventListener('click', () => addCardModal.open());
 document.querySelector('.profile__edit').addEventListener('click', () => {
+  //collect existing inputs that user is going change
   descriptionInput.value = profileDescription.textContent;
   nameInput.value = profileName.textContent;
+
   editProfileModal.open();
+  //get user inputs
+  profile.getUserInfo();
 });
 
 //render cards to the page
