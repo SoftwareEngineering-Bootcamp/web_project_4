@@ -5,7 +5,7 @@ import Section from '../components/Section';
 import UserInfo from '../components/UserInfo';
 import PopupWithForm from '../components/PopupWithForm';
 import PopupWithImage from '../components/PopupWithImage';
-import { initialCards, defaultSettings, descriptionInput, nameInput, profileName, profileDescription } from '../utils/utils';
+import { initialCards, defaultSettings, descriptionInput, nameInput } from '../utils/utils';
 
 
 //instances of form validator for edit-profile and add-card
@@ -40,34 +40,23 @@ const defaultCardList = new Section(
 
 //add-card to gallery form
 const addCardModal = new PopupWithForm({
-  popupSelector: '.popup_type_add-card',
+  popupSelector: ".popup_type_add-card",
   handleFormSubmit: ({name, link}) => addCard({name, link})
 });
 
-const profile = new UserInfo(".form__input_type_name", ".form__input_type_description");
+const profile = new UserInfo(nameInput, descriptionInput);
 
 //edit-profile form
 const editProfileModal = new PopupWithForm({
   popupSelector: ".popup_type_edit-profile",
-  handleFormSubmit: () => {
-    //retreive and set inputs from profile
-    profile.setUserInfo();
-    //collect inputs to display
-    profileDescription.textContent = descriptionInput.value;
-    profileName.textContent = nameInput.value;
-  }
+  handleFormSubmit: () => profile.setUserInfo(nameInput, descriptionInput)
 });
 
 // add listeners for edit-icon and add-icon
 document.querySelector('.add-button').addEventListener('click', () => addCardModal.open());
 document.querySelector('.profile__edit').addEventListener('click', () => {
-  //collect existing inputs that user is going change
-  descriptionInput.value = profileDescription.textContent;
-  nameInput.value = profileName.textContent;
-
-  editProfileModal.open();
-  //get user inputs
   profile.getUserInfo();
+  editProfileModal.open();
 });
 
 //render cards to the page

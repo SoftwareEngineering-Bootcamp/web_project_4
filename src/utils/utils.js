@@ -16,11 +16,6 @@ const initialCards = [
   { name: "Lago di Braies", link: lagoDiBraiesImage }
 ];
 
-const nameInput = document.querySelector('.form__input_type_name');
-const descriptionInput = document.querySelector('.form__input_type_description');
-const profileName = document.querySelector('.profile__name');
-const profileDescription = document.querySelector('.profile__description');
-
 const defaultSettings = {
   formSelector: ".form",
   inputSelector: ".form__input",
@@ -29,5 +24,10 @@ const defaultSettings = {
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__error_visible"
 };
+
+const nameInput = document.querySelector('.form__input_type_name');
+const descriptionInput = document.querySelector('.form__input_type_description');
+const profileName = document.querySelector('.profile__name');
+const profileDescription = document.querySelector('.profile__description');
 
 export { initialCards, defaultSettings, descriptionInput, nameInput, profileName, profileDescription};

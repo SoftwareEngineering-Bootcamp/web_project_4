@@ -38,7 +38,7 @@
 
     <!-- overlay form pop up for user to update profile section -->
     <div class="popup popup_type_edit-profile">
-      <form name="profile" class="form form_edit-profile popup__form">
+      <form id="editForm" name="profile" class="form form_edit-profile popup__form">
         <h2 class="form__title">Edit Profile</h2>
         <fieldset class="form__field">
           <input id="profile-name" type="text" name="name" class="form__input form__input_type_name" placeholder="Name" minlength="2" maxlength="40" required>
@@ -54,7 +54,7 @@
 
     <!-- overlay form pop up for user to add a card -->
     <div class="popup popup_type_add-card">
-      <form name="add" class="form form_add-card popup__form">
+      <form id="addForm" name="add" class="form form_add-card popup__form">
         <h2 class="form__title">New place</h2>
         <fieldset class="form__field">
           <input id="card-title" type="text" name="name" class="form__input form__input_type_card-title" placeholder="Title" minlength="2" maxlength="30" required>
