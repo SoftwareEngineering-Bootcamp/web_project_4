@@ -5,7 +5,7 @@ import Section from '../components/Section';
 import UserInfo from '../components/UserInfo';
 import PopupWithForm from '../components/PopupWithForm';
 import PopupWithImage from '../components/PopupWithImage';
-import { initialCards, defaultSettings, descriptionInput, nameInput } from '../utils/utils';
+import { initialCards, defaultSettings, descriptionInput, nameInput, profileName, profileDescription } from '../utils/utils';
 
 
 //instances of form validator for edit-profile and add-card
@@ -49,14 +49,22 @@ const profile = new UserInfo(nameInput, descriptionInput);
 //edit-profile form
 const editProfileModal = new PopupWithForm({
   popupSelector: ".popup_type_edit-profile",
-  handleFormSubmit: () => profile.setUserInfo(nameInput, descriptionInput)
+  handleFormSubmit: () => {
+    profile.setUserInfo(nameInput, descriptionInput);
+
+    profileName.textContent = nameInput.value;
+    profileDescription.textContent = descriptionInput.value;
+  }
 });
 
 // add listeners for edit-icon and add-icon
 document.querySelector('.add-button').addEventListener('click', () => addCardModal.open());
 document.querySelector('.profile__edit').addEventListener('click', () => {
-  profile.getUserInfo();
   editProfileModal.open();
+
+  const userInfos = profile.getUserInfo();
+  nameInput.value = userInfos.name;
+  descriptionInput.value = userInfos.job;
 });
 
 //render cards to the page

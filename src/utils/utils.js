@@ -30,4 +30,4 @@ const descriptionInput = document.querySelector('.form__input_type_description')
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 
-export { initialCards, defaultSettings, descriptionInput, nameInput, profileName, profileDescription};
+export { initialCards, defaultSettings, descriptionInput, nameInput, profileName, profileDescription };
