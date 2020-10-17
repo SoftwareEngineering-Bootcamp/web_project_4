@@ -1,7 +1,7 @@
 export default class UserInfo {
   constructor(name, job) {
-    this._name = name.value;
-    this._job = job.value;
+    this._name = name.textContent;
+    this._job = job.textContent;
   }
 
   getUserInfo() {

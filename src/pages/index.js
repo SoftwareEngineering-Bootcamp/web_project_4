@@ -44,7 +44,7 @@ const addCardModal = new PopupWithForm({
   handleFormSubmit: ({name, link}) => addCard({name, link})
 });
 
-const profile = new UserInfo(nameInput, descriptionInput);
+const profile = new UserInfo(profileName, profileDescription);
 
 //edit-profile form
 const editProfileModal = new PopupWithForm({
@@ -61,6 +61,7 @@ const editProfileModal = new PopupWithForm({
 document.querySelector('.add-button').addEventListener('click', () => addCardModal.open());
 document.querySelector('.profile__edit').addEventListener('click', () => {
   editProfileModal.open();
+  profile.getUserInfo();
 
   const userInfos = profile.getUserInfo();
   nameInput.value = userInfos.name;
