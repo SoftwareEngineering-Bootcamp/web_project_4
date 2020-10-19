@@ -49,21 +49,16 @@ const profile = new UserInfo(profileName, profileDescription);
 //edit-profile form
 const editProfileModal = new PopupWithForm({
   popupSelector: ".popup_type_edit-profile",
-  handleFormSubmit: () => {
-    profile.setUserInfo(nameInput, descriptionInput);
-
-    profileName.textContent = nameInput.value;
-    profileDescription.textContent = descriptionInput.value;
-  }
+  handleFormSubmit: () => profile.setUserInfo(nameInput.value, descriptionInput.value)
 });
 
 // add listeners for edit-icon and add-icon
 document.querySelector('.add-button').addEventListener('click', () => addCardModal.open());
 document.querySelector('.profile__edit').addEventListener('click', () => {
   editProfileModal.open();
-  profile.getUserInfo();
 
   const userInfos = profile.getUserInfo();
+  
   nameInput.value = userInfos.name;
   descriptionInput.value = userInfos.job;
 });

@@ -1,19 +1,22 @@
+import { profileName, profileDescription } from '../utils/utils';
+
 export default class UserInfo {
   constructor(name, job) {
-    this._name = name.textContent;
-    this._job = job.textContent;
+    this._name = name;
+    this._job = job;
   }
 
   getUserInfo() {
-    this._userDetails = {
-      name: this._name,
-      job: this._job
+    return this._userDetails = {
+      name: this._name.textContent,
+      job: this._job.textContent
     }
-
-    return this._userDetails;
   }
 
   setUserInfo(name, job) {
     this._userDetails = { name, job };
+
+    profileName.textContent = this._userDetails.name;
+    profileDescription.textContent = this._userDetails.job;
   }
 }
