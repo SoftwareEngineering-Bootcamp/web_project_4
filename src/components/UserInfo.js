@@ -1,22 +1,18 @@
-import { profileName, profileDescription } from '../utils/utils';
-
 export default class UserInfo {
-  constructor(name, job) {
-    this._name = name;
-    this._job = job;
+  constructor({userNameSelector, userDescriptionSelector}) {
+    this._userNameElement = document.querySelector(`.${userNameSelector}`);
+    this._userDescriptionElement = document.querySelector(`.${userDescriptionSelector}`);
   }
 
   getUserInfo() {
-    return this._userDetails = {
-      name: this._name.textContent,
-      job: this._job.textContent
+    return {
+      userName: this._userNameElement.textContent,
+      userDescription: this._userDescriptionElement.textContent
     }
   }
 
-  setUserInfo(name, job) {
-    this._userDetails = { name, job };
-
-    profileName.textContent = this._userDetails.name;
-    profileDescription.textContent = this._userDetails.job;
+  setUserInfo({userName, userDescription}) {
+    this._userNameElement.textContent = userName;
+    this._userDescriptionElement.textContent = userDescription;
   }
 }

@@ -3,7 +3,7 @@ export default class Section {
     this._renderedElements = item;
     this._renderer = renderer;
     //stores a public method that renders all elements on the page
-    this._container = document.querySelector(cardContainerSelector);
+    this._container = document.querySelector(`.${cardContainerSelector}`);
   }
   //render each element on a page
   rendererItems() {

@@ -1,9 +1,19 @@
 export default class Card {
-  constructor({name, link, handleCardClick}, cardSelector) {
-    this._title = name;
-    this._link = link;
+  constructor({data, handleCardClick, handleDeleteClick, handleLikeClick}, userId, cardSelector) {
+    this._title = data.name;
+    this._link = data.link;
+    this._id = data._id;
+    this._owner = data.owner;
+    this._likes = data.likes;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteClick = handleDeleteClick;
+    this._handleLikeClick = handleLikeClick;
+    this._userId = userId;
     this._cardSelector = cardSelector;
+  }
+
+  id() {
+    return this._id();
   }
 
   _getTemplate() {
@@ -13,34 +23,39 @@ export default class Card {
           return cardElement;
   }
 
-  _changeLikeButton() {
-    this._likeButton.classList.toggle('element__like_active');
+  _renderLikes() {
+    if(this._likes.some((like) => like._id === this._userId)) {
+      this.cardElement.querySelector('.element__like').classList.add('element__like_active');
+    }
   }
 
-  _removeCard() {
-    this._element.remove();
-    this._element = null;
+  likesCount(countLike) {
+    this.cardElement.querySelector('.element__like_count').textContent = countLike;
   }
+
+  // _removeCard() {
+  //   this._element.remove();
+  //   this._element = null;
+  // }
 
   _setEventListeners() {
-    //change like button style on click
-    this._likeButton.addEventListener('click', () => this._changeLikeButton());
-    //delete card from gallery
-    this._deleteButton.addEventListener("click", () => this._removeCard());
-    //expand card on full screen
-    this._cardImage.addEventListener("click", () => this._handleCardClick());
+    //handle like button on click
+    this._element.querySelector('.element__like').addEventListener('click', (evt) => {
+      evt.target.classList.toggle('element__like_active');
+      this._handleLikeClick(this._id);
+    });
+    //delete a card from gallery
+    this._element.querySelector('.element__delete').addEventListener("click", () => this._handleDeleteClick(this.id()));
+    //expand a card on full screen
+    this._element.querySelector('.element__photo').addEventListener("click", () => this._handleCardClick());
   }
 
   getCardElements() {
     this._element = this._getTemplate();
-    this._cardImage = this._element.querySelector('.element__photo');
-    this._cardTitle = this._element.querySelector('.element__name');
-    this._likeButton = this._element.querySelector('.element__like');
-    this._deleteButton = this._element.querySelector('.element__delete');
 
-    this._cardImage.src = this._link;
-    this._cardImage.alt = this._title;
-    this._cardTitle.textContent = this._title;
+    this._element.querySelector('.element__photo').src = this._link;
+    this._element.querySelector('.element__photo').alt = this._title;
+    this._element.querySelector('.element__name').textContent = this._title;
 
     this._setEventListeners();
 

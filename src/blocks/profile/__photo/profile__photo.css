@@ -1,9 +1,18 @@
+@import url('./_edit/profile__photo_edit.css');
+
 .profile__photo {
+  position: relative;
   display: block;
-  border-radius: 50%;
-  border-color: #c4c4c4;
   width: 120px;
   height: 120px;
   margin: 0 auto;
+
+  border-radius: 50%;
+  border-color: #c4c4c4;
+  cursor: pointer;
 }
 
+/* .profile__photo:hover .profile__photo_edit {
+  display: block;
+}
+ */

@@ -1,6 +1,6 @@
 # Project Around The U.S.
 
-# Project 4, 5, 6, 7 & 8 from Praticum by Yandex Web Dev course
+# Project 4, 5, 6, 7, 8 & 9 from Praticum by Yandex Web Dev course
 
 ## My first project using JavaScript
 * [My project is accessible here](https://abra-sena.github.io/web_project_4/)
@@ -18,6 +18,14 @@
 * Form validation and event handling.
 
 ### Functionality
+
+**Project 9: Connect project to server**
+
+* Make a request to the server
+* Laod user informations from server
+* Load card from server to the page
+* Add card to the server and render them on the page
+* Use API to delete card from the gallery, handle event listeners and count of a card's likes
 
 **Project 8: Refactoring, Project bundling and building with Webpack**
 
