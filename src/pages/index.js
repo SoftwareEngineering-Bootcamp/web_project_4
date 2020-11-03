@@ -90,7 +90,7 @@ api.getAppInfo()
       const card = new Card({
         data,
         handleCardClick: () => {
-          imageOpenModal.open(data)
+          imageOpenModal.open(data.name, data.link)
         },
         handleDeleteClick: (cardId) => {
           //open form to ask user's confirmation to delete card
@@ -110,13 +110,13 @@ api.getAppInfo()
           });
         },
         handleLikeClick: (cardId) => {
-          if(cardId.likeButton.classList.contains('element__like_active')) {
-            cardId.likeButton.classList.remove('element__like_active');
+          if(cardId.classList.contains('element__like_active')) {
+            // cardId.likeButton.classList.remove('element__like_active');
             api.removeCardLike(cardId)
               .then(res => card.likesCount(res.likes.length))
               .catch(err => console.log(err))
           } else {
-            cardId.likeButton.classList.add('element__like_active');
+            // cardId.likeButton.classList.add('element__like_active');
             api.addCardLike(cardId)
               .then(res => card.likesCount(res.likes.length))
               .catch(err => console.log(err))
