@@ -13,7 +13,7 @@ export default class Card {
   }
 
   id() {
-    return this._id();
+    return this._id;
   }
 
   _getTemplate() {
@@ -23,27 +23,24 @@ export default class Card {
           return cardElement;
   }
 
-  _renderLikes() {
-    if(this._likes.some((like) => like._id === this._userId)) {
-      this.cardElement.querySelector('.element__like').classList.add('element__like_active');
-    }
-  }
+  // _renderLikes() {
+  //   if(this._likes.some((like) => like._id === this._userId)) {
+  //     this.cardElement.querySelector('.element__like').classList.add('element__like_active');
+  //   }
+  // }
 
   likesCount(countLike) {
     this.cardElement.querySelector('.element__like_count').textContent = countLike;
   }
 
-  // _removeCard() {
-  //   this._element.remove();
-  //   this._element = null;
-  // }
+  deleteCard() {
+    this._element.remove();
+    this._element = null;
+  }
 
   _setEventListeners() {
     //handle like button on click
-    this._element.querySelector('.element__like').addEventListener('click', (evt) => {
-      evt.target.classList.toggle('element__like_active');
-      this._handleLikeClick(this._id);
-    });
+    this._element.querySelector('.element__like').addEventListener('click', () => this._handleLikeClick(this.id));
     //delete a card from gallery
     this._element.querySelector('.element__delete').addEventListener("click", () => this._handleDeleteClick(this.id()));
     //expand a card on full screen

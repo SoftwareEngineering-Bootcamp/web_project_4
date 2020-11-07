@@ -46,10 +46,8 @@ export const cardsConfig = {
 export const nameInput = document.querySelector('.form__input_type_name');
 export const descriptionInput = document.querySelector('.form__input_type_description');
 export const likeButton = document.querySelector('.element__like');
+export const submitButton = document.querySelector('.form__submit');
 
-export const popupAddCard = document.querySelector('.popup_type_add-card');
 export const popupEditAvatar = document.querySelector('.popup_type_edit-avatar');
-export const popupEditProfile = document.querySelector('.popup_type_edit-profile');
-export const popupImage = document.querySelector('.popup_type_image');
 export const popupDeleteCard = document.querySelector('.popup_type_delete');
 

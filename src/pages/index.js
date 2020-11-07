@@ -5,8 +5,8 @@ import Section from '../components/Section';
 import UserInfo from '../components/UserInfo';
 import PopupWithForm from '../components/PopupWithForm';
 import PopupWithImage from '../components/PopupWithImage';
-import { defaultSettings, profileConfig, cardsConfig, popupConfig, initialCards,
-  popupAddCard, popupEditAvatar, popupEditProfile, popupImage, popupDeleteCard, descriptionInput, nameInput, likeButton } from '../utils/constants';
+import { defaultSettings, profileConfig, cardsConfig, popupConfig, initialCards, popupEditAvatar, popupDeleteCard,
+  descriptionInput, nameInput, likeButton, submitButton } from '../utils/constants';
 
 import  "./index.css";
 
@@ -16,27 +16,27 @@ import  "./index.css";
  *
  */
 
-const loadingCard = (isLoading, popup) => {
+const loading = (isLoading) => {
   if(isLoading) {
-    popup.querySelector('.form__submit').textContent = "Saving...";
+    submitButton.textContent = "Saving...";
   } else {
-    popup.querySelector('.form__submit').textContent = "Save";
+    submitButton.textContent = "Save";
   }
 }
 
-const creatingCard = (isCreating, popup) => {
+const creating = (isCreating) => {
   if(isCreating) {
-    popup.querySelector('.form__submit').textContent = "Creating...";
+    submitButton.textContent = "Creating...";
   } else {
-    popup.querySelector('.form__submit').textContent = "Create";
+    submitButton.textContent = "Create";
   }
 }
 
-const deletingCard = (isDeleting, popup) => {
+const deleting = (isDeleting) => {
   if(isDeleting) {
-    popup.querySelector('.form__submit').textContent = "Deleting...";
+    submitButton.textContent = "Deleting...";
   } else {
-    popup.querySelector('.form__submit').textContent = "Deleted!";
+    submitButton.textContent = "Deleted!";
   }
 }
 
@@ -72,7 +72,7 @@ api.getAppInfo()
     const addCardModal = new PopupWithForm({
       popupSelector: popupConfig.addCardFormModal,
       handleFormSubmit: (data) => {
-        creatingCard(true,popupAddCard);
+        creating(true);
         api.addCard(data)
           .then(data => {
             //instance of card
@@ -98,25 +98,27 @@ api.getAppInfo()
           popupDeleteCard.querySelector('.form__submit').textContent = "Yes";
           //handle click on submit button
           deleteCardModal.setSubmitHandler(() => {
-            deletingCard(true, popupDeleteCard);
+            deleting(true);
             //remove the card
             api.removeCard(cardId)
               .then(() => {
                 card.deleteCard();
-                deletingCard(false, popupDeleteCard);
+                deleting(false);
                 deleteCardModal.close();
               })
               .catch(err => console.log(err));
           });
         },
         handleLikeClick: (cardId) => {
-          if(cardId.classList.contains('element__like_active')) {
-            // cardId.likeButton.classList.remove('element__like_active');
+          const isLiked = card.querySelector('.element__like').classList.contains('element__like_active');
+          console.log(isLiked)
+          if(isLiked) {
+            card.querySelector('.element__like').classList.remove('element__like_active');
             api.removeCardLike(cardId)
               .then(res => card.likesCount(res.likes.length))
               .catch(err => console.log(err))
           } else {
-            // cardId.likeButton.classList.add('element__like_active');
+            card.querySelector('.element__like').classList.add('element__like_active');
             api.addCardLike(cardId)
               .then(res => card.likesCount(res.likes.length))
               .catch(err => console.log(err))
@@ -125,12 +127,13 @@ api.getAppInfo()
       }, userData._id, cardsConfig.cardSelector);
 
       defaultCardList.addItem(card.getCardElements());
-      creatingCard(false, popupAddCard);
+      creating(false);
 
       const profile = new UserInfo({
         userNameSelector: profileConfig.profileName,
         userDescriptionSelector: profileConfig.profileDescription
       });
+      //set user infos(name and job) on profile section on page launch
       profile.setUserInfo({userName: userData.name, userDescription: userData.about});
       popupEditAvatar.src = userData.avatar;
 
@@ -138,14 +141,15 @@ api.getAppInfo()
       const editProfileModal = new PopupWithForm({
         popupSelector: popupConfig.editFormModal,
         handleFormSubmit: (data) => {
-          loadingCard(true, popupEditProfile)
-          // profile.setUserInfo(data)
-           api.getUserInfo()
-            .then(res => {
+          loading(true);
+          api.getUserInfo({name: data.name, about: data.about})
+            .then(() => {
               profile.setUserInfo({userName: data.name, userDescription: data.about});
+              console.log(profile);
+              loading(false);
             })
-            .then(res => {
-              loadingCard(false, popupEditProfile);
+            .then(() => {
+              // loading(false);
               editProfileModal.close();
             })
             .catch(err => console.log(err))
@@ -156,8 +160,8 @@ api.getAppInfo()
       document.querySelector('.profile__edit').addEventListener('click', () => {
         editProfileModal.open();
         const userInfos = profile.getUserInfo();
-        nameInput.value = userInfos.name;
-        descriptionInput.value = userInfos.job;
+        nameInput.value = userInfos.userName;
+        descriptionInput.value = userInfos.userDescription;
       });
       editProfileModal.setEventListeners();
     }
@@ -174,12 +178,12 @@ function toggleAvatarEdit() {
 const editAvatar = new PopupWithForm({
   popupSelector: popupConfig.editAvatarModal,
   handleFormSubmit: (data) => {
-    loadingCard(true, popupEditAvatar);
+    loading(true);
     api.setUserAvatar({
       avatar: data.src
     })
       .then(res => {
-        loadingCard(false, popupEditAvatar);
+        loading(false);
         editAvatar.src = res.avatar;
         editAvatar.close();
       })
