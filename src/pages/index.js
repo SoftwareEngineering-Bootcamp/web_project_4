@@ -63,7 +63,7 @@ api.getAppInfo()
       renderer: addingCardToPage
       },
       cardsConfig.placesWrap
-    );
+    )
 
     //render cards to the page
     defaultCardList.rendererItems();
@@ -110,17 +110,19 @@ api.getAppInfo()
           });
         },
         handleLikeClick: (cardId) => {
-          const isLiked = card.querySelector('.element__like').classList.contains('element__like_active');
-          console.log(isLiked)
+          const isLiked = card._element.querySelector('.element__like').classList.contains('element__like_active');
           if(isLiked) {
-            card.querySelector('.element__like').classList.remove('element__like_active');
+            card._element.querySelector('.element__like').classList.remove('element__like_active');
             api.removeCardLike(cardId)
               .then(res => card.likesCount(res.likes.length))
               .catch(err => console.log(err))
           } else {
-            card.querySelector('.element__like').classList.add('element__like_active');
+            card._element.querySelector('.element__like').classList.add('element__like_active');
+            // ---------------------------------------
             api.addCardLike(cardId)
-              .then(res => card.likesCount(res.likes.length))
+              .then(res => {
+                return card.likesCount(res.likes.length)
+              })
               .catch(err => console.log(err))
           }
         }
@@ -166,6 +168,7 @@ api.getAppInfo()
       editProfileModal.setEventListeners();
     }
   })
+  .then(() =>{} /*set likes active or not according to the data from the cards request*/)
   .catch(err => console.log(err));
 
 const avatarEditButton = document.querySelector('.profile__photo_edit');
@@ -178,12 +181,12 @@ function toggleAvatarEdit() {
 const editAvatar = new PopupWithForm({
   popupSelector: popupConfig.editAvatarModal,
   handleFormSubmit: (data) => {
-    loading(true);
+    loading(false);
     api.setUserAvatar({
       avatar: data.src
     })
       .then(res => {
-        loading(false);
+        loading(true);
         editAvatar.src = res.avatar;
         editAvatar.close();
       })

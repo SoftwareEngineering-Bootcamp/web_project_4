@@ -30,7 +30,7 @@ export default class Card {
   // }
 
   likesCount(countLike) {
-    this.cardElement.querySelector('.element__like_count').textContent = countLike;
+    this._getTemplate().querySelector('.element__like_count').textContent = countLike;
   }
 
   deleteCard() {
@@ -40,7 +40,7 @@ export default class Card {
 
   _setEventListeners() {
     //handle like button on click
-    this._element.querySelector('.element__like').addEventListener('click', () => this._handleLikeClick(this.id));
+    this._element.querySelector('.element__like').addEventListener('click', () => this._handleLikeClick(this.id()));
     //delete a card from gallery
     this._element.querySelector('.element__delete').addEventListener("click", () => this._handleDeleteClick(this.id()));
     //expand a card on full screen
