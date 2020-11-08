@@ -1,7 +1,6 @@
 .profile__avatar {
   position: relative;
-  width: 150px;
-  margin-right: 30px;
+  width: 120px;
   /* display: flex;
   flex-direction: column;
   justify-content: space-between;

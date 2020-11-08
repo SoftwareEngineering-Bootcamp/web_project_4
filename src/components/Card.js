@@ -30,7 +30,7 @@ export default class Card {
   // }
 
   likesCount(countLike) {
-    this._getTemplate().querySelector('.element__like_count').textContent = countLike;
+    this._element.querySelector('.element__like_count').textContent = countLike;
   }
 
   deleteCard() {

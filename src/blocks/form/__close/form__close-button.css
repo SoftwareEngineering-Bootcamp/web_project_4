@@ -1,6 +1,6 @@
 .form__close-button {
   right: -10%;
-  top: -10%;
+  top: -12%;
   margin: 0 auto;
   padding: 0;
   box-sizing: border-box;
@@ -22,6 +22,9 @@
   .form__close-button {
     height: 40px;
     width: 40px;
+  }
+  .form__close-button_delete {
+    top: -20%;
   }
 }
 

@@ -43,11 +43,17 @@ export const cardsConfig = {
   cardSelector: '.element'
 };
 
+export const likeButton = document.querySelector('.element__like');
+export const likeCount = document.querySelector('.element__like_count');
+
+export const submitButton = document.querySelector('.form__submit');
 export const nameInput = document.querySelector('.form__input_type_name');
 export const descriptionInput = document.querySelector('.form__input_type_description');
-export const likeButton = document.querySelector('.element__like');
-export const submitButton = document.querySelector('.form__submit');
+export const avatarPicInput = document.querySelector('.form__input_type_avatar-url');
 
 export const popupEditAvatar = document.querySelector('.popup_type_edit-avatar');
 export const popupDeleteCard = document.querySelector('.popup_type_delete');
+
+export const avatarImage = document.querySelector('.profile__photo');
+export const avatarEditButton = document.querySelector('.profile__photo_edit');
 

@@ -16,7 +16,7 @@
     <main class="content">
       <section class="profile">
         <div class="profile__avatar">
-          <img src="../src/images/profile_avatar.png" alt="profile-pic" class="profile__photo">
+          <img src="#" alt="profile-pic" class="profile__photo">
           <button type="button" aria-label="edit-avatar" class="profile__photo_edit"></button>
         </div>
         <div class="profile__info">
@@ -39,13 +39,13 @@
 
     <!-- overlay form popup to edit profile avatar -->
     <div class="popup popup_type_edit-avatar">
-      <form id="addForm" name="avatar" class="form form_edit-avatar popup__form">
+      <form id="avatar" name="avatar" class="form form_edit-avatar popup__form">
         <h2 class="form__title">Change Profile Picture</h2>
         <fieldset class="form__field">
           <input id="avatar-url" type="url" name="link" class="form__input form__input_type_avatar-url" placeholder="Avatar link" required>
           <span id="avatar-url-error" class="form__field form__field_error"></span>
         </fieldset>
-        <button type="submit" aria-label="save-edit-avatar" class="form__submit">Create</button>
+        <button type="submit" aria-label="save-edit-avatar" class="form__submit"></button>
         <button type="button" aria-label="close-edit-avatar" class="popup__close form__close-button"></button>
       </form>
     </div>
@@ -84,10 +84,10 @@
 
     <!-- popup for user to confirm card's delete -->
     <div class="popup popup_type_delete">
-      <form id="deleteCard" name="delete" class="form_confirm-delete popup__form">
+      <form id="deleteCard" name="delete" class="form form_confirm-delete popup__form">
         <h2 class="form__title">Are You Sure?</h2>
         <button type="submit" aria-label="confirm-card-delete" class="form__submit">Yes</button>
-        <button type="button" aria-label="close-delete-confirmation" class="popup__close"></button>
+        <button type="button" aria-label="close-delete-confirmation" class="form__close-button form__close-button_delete"></button>
       </form>
     </div>
 

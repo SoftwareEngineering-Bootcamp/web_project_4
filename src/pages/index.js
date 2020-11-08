@@ -5,13 +5,14 @@ import Section from '../components/Section';
 import UserInfo from '../components/UserInfo';
 import PopupWithForm from '../components/PopupWithForm';
 import PopupWithImage from '../components/PopupWithImage';
-import { defaultSettings, profileConfig, cardsConfig, popupConfig, initialCards, popupEditAvatar, popupDeleteCard,
-  descriptionInput, nameInput, likeButton, submitButton } from '../utils/constants';
+import {
+  defaultSettings, profileConfig, cardsConfig, popupConfig, popupDeleteCard, avatarImage,
+  avatarPicInput, avatarEditButton, descriptionInput, nameInput, likeButton, submitButton
+} from '../utils/constants';
 
 import  "./index.css";
 
 /** TODO
- *  Code popup to confirm card deletion
  *  Show numbers of likes on each cards of the page
  *
  */
@@ -137,7 +138,6 @@ api.getAppInfo()
       });
       //set user infos(name and job) on profile section on page launch
       profile.setUserInfo({userName: userData.name, userDescription: userData.about});
-      popupEditAvatar.src = userData.avatar;
 
       //edit-profile form
       const editProfileModal = new PopupWithForm({
@@ -148,7 +148,7 @@ api.getAppInfo()
             .then(() => {
               profile.setUserInfo({userName: data.name, userDescription: data.about});
               console.log(profile);
-              loading(false);
+              // loading(false);
             })
             .then(() => {
               // loading(false);
@@ -167,14 +167,12 @@ api.getAppInfo()
       });
       editProfileModal.setEventListeners();
     }
+
+    //retrieve user avatar
+    avatarImage.src = userData.avatar;
   })
   .then(() =>{} /*set likes active or not according to the data from the cards request*/)
   .catch(err => console.log(err));
-
-const avatarEditButton = document.querySelector('.profile__photo_edit');
-function toggleAvatarEdit() {
-  avatarEditButton.classList.toggle('popup_open');
-}
 
 
 // edit profile avatar
@@ -183,18 +181,21 @@ const editAvatar = new PopupWithForm({
   handleFormSubmit: (data) => {
     loading(false);
     api.setUserAvatar({
-      avatar: data.src
+      avatar: data.link
     })
-      .then(res => {
-        loading(true);
-        editAvatar.src = res.avatar;
+      .then(() => {
+        avatarImage.src = data.link;
         editAvatar.close();
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
+    loading(true);
   }
 });
-// event listeners to open modal for avatar changing
-document.querySelector('.profile__photo_edit').addEventListener('click', () => {
+
+// event listeners to open avatar changing modal
+avatarEditButton.addEventListener('click', () => {
+  loading(false);
+  avatarPicInput.value = avatarImage.src;
   editAvatar.open();
 });
 
