@@ -7,15 +7,10 @@ import PopupWithForm from '../components/PopupWithForm';
 import PopupWithImage from '../components/PopupWithImage';
 import {
   defaultSettings, profileConfig, cardsConfig, popupConfig, popupDeleteCard, avatarImage,
-  avatarPicInput, avatarEditButton, descriptionInput, nameInput, likeButton, submitButton
+  avatarPicInput, avatarEditButton, descriptionInput, nameInput, submitButton
 } from '../utils/constants';
 
 import  "./index.css";
-
-/** TODO
- *  Show numbers of likes on each cards of the page
- *
- */
 
 const loading = (isLoading) => {
   if(isLoading) {
@@ -65,7 +60,6 @@ api.getAppInfo()
       },
       cardsConfig.placesWrap
     )
-
     //render cards to the page
     defaultCardList.rendererItems();
 
@@ -83,7 +77,6 @@ api.getAppInfo()
           .catch(err => console.log(err))
       }
     });
-
     addCardModal.setEventListeners();
     document.querySelector('.add-button').addEventListener('click', () => addCardModal.open());
 
@@ -119,7 +112,6 @@ api.getAppInfo()
               .catch(err => console.log(err))
           } else {
             card._element.querySelector('.element__like').classList.add('element__like_active');
-            // ---------------------------------------
             api.addCardLike(cardId)
               .then(res => {
                 return card.likesCount(res.likes.length)
@@ -131,47 +123,53 @@ api.getAppInfo()
 
       defaultCardList.addItem(card.getCardElements());
       creating(false);
-
-      const profile = new UserInfo({
-        userNameSelector: profileConfig.profileName,
-        userDescriptionSelector: profileConfig.profileDescription
-      });
-      //set user infos(name and job) on profile section on page launch
-      profile.setUserInfo({userName: userData.name, userDescription: userData.about});
-
-      //edit-profile form
-      const editProfileModal = new PopupWithForm({
-        popupSelector: popupConfig.editFormModal,
-        handleFormSubmit: (data) => {
-          loading(true);
-          api.getUserInfo({name: data.name, about: data.about})
-            .then(() => {
-              profile.setUserInfo({userName: data.name, userDescription: data.about});
-              console.log(profile);
-              // loading(false);
-            })
-            .then(() => {
-              // loading(false);
-              editProfileModal.close();
-            })
-            .catch(err => console.log(err))
-        }
-      });
-
-      // add listeners for edit-icon
-      document.querySelector('.profile__edit').addEventListener('click', () => {
-        editProfileModal.open();
-        const userInfos = profile.getUserInfo();
-        nameInput.value = userInfos.userName;
-        descriptionInput.value = userInfos.userDescription;
-      });
-      editProfileModal.setEventListeners();
     }
+
+    const profile = new UserInfo({
+      userNameSelector: profileConfig.profileName,
+      userDescriptionSelector: profileConfig.profileDescription
+    });
+    //set user infos(name and job) on profile section on page launch
+    profile.setUserInfo({userName: userData.name, userDescription: userData.about});
+    console.log("name " + userData.name + " - job: " + userData.about);
+
+    //edit-profile form
+    const editProfileModal = new PopupWithForm({
+      popupSelector: popupConfig.editFormModal,
+      handleFormSubmit: (data) => {
+        console.log("1." + data.name + "-job: " + data.about);
+        loading(true);
+        api.setUserInfos({
+          name: data.name,
+          about: data.about
+        })
+          .then(() => {
+            profile.setUserInfo({
+              userName: data.name,
+              userDescription: data.about
+            });
+            loading(false);
+          })
+          .then(() => {
+            editProfileModal.close();
+          })
+          .catch(err => console.log(err))
+      }
+    });
+
+    // add listeners for edit-icon
+    document.querySelector('.profile__edit').addEventListener('click', () => {
+      loading(false);
+      editProfileModal.open();
+      const userInfos = profile.getUserInfo();
+      nameInput.value = userInfos.userName;
+      descriptionInput.value = userInfos.userDescription;
+    });
+    editProfileModal.setEventListeners();
 
     //retrieve user avatar
     avatarImage.src = userData.avatar;
   })
-  .then(() =>{} /*set likes active or not according to the data from the cards request*/)
   .catch(err => console.log(err));
 
 
@@ -179,7 +177,6 @@ api.getAppInfo()
 const editAvatar = new PopupWithForm({
   popupSelector: popupConfig.editAvatarModal,
   handleFormSubmit: (data) => {
-    loading(false);
     api.setUserAvatar({
       avatar: data.link
     })
@@ -198,8 +195,6 @@ avatarEditButton.addEventListener('click', () => {
   avatarPicInput.value = avatarImage.src;
   editAvatar.open();
 });
-
-
 
 
 //instances of form validator for edit-profile and add-card

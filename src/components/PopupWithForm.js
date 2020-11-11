@@ -34,6 +34,7 @@ export default class PopupWithForm extends Popup{
     });
   }
 
+  //delete card submit handler
   setSubmitHandler(event) {
     this._handleFormSubmit = event;
   }

@@ -44,8 +44,6 @@ export const cardsConfig = {
 };
 
 export const likeButton = document.querySelector('.element__like');
-export const likeCount = document.querySelector('.element__like_count');
-
 export const submitButton = document.querySelector('.form__submit');
 export const nameInput = document.querySelector('.form__input_type_name');
 export const descriptionInput = document.querySelector('.form__input_type_description');

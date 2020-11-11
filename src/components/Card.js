@@ -23,11 +23,11 @@ export default class Card {
           return cardElement;
   }
 
-  // _renderLikes() {
-  //   if(this._likes.some((like) => like._id === this._userId)) {
-  //     this.cardElement.querySelector('.element__like').classList.add('element__like_active');
-  //   }
-  // }
+  _renderLikes() {
+    if(this._likes.some((like) => like._id === this._userId)) {
+      this._element.querySelector('.element__like').classList.add('element__like_active');
+    }
+  }
 
   likesCount(countLike) {
     this._element.querySelector('.element__like_count').textContent = countLike;
@@ -53,6 +53,9 @@ export default class Card {
     this._element.querySelector('.element__photo').src = this._link;
     this._element.querySelector('.element__photo').alt = this._title;
     this._element.querySelector('.element__name').textContent = this._title;
+
+    this._renderLikes();
+    this.likesCount(this._likes.length);
 
     this._setEventListeners();
 

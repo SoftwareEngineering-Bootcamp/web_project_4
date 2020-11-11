@@ -112,7 +112,7 @@ export default class Api {
    * Editing the Profile
    * PATCH https://around.nomoreparties.co/v1/groupId/users/me
    */
-  setUserInfo({name, about}) {
+  setUserInfos({name, about}) {
     return fetch(this._baseUrl + '/users/me', {
       headers: this._headers,
       method: "PATCH",
