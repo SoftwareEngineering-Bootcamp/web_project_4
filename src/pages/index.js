@@ -6,35 +6,12 @@ import UserInfo from '../components/UserInfo';
 import PopupWithForm from '../components/PopupWithForm';
 import PopupWithImage from '../components/PopupWithImage';
 import {
-  defaultSettings, profileConfig, cardsConfig, popupConfig, popupDeleteCard, avatarImage,
-  avatarPicInput, avatarEditButton, descriptionInput, nameInput, submitButton
+  defaultSettings, profileConfig, cardsConfig, popupConfig, avatarImage, avatarPicInput, avatarEditButton,
+  descriptionInput, nameInput, submitAvatar, submitCard, submitEdit, projectId
 } from '../utils/constants';
 
 import  "./index.css";
 
-const loading = (isLoading) => {
-  if(isLoading) {
-    submitButton.textContent = "Saving...";
-  } else {
-    submitButton.textContent = "Save";
-  }
-}
-
-const creating = (isCreating) => {
-  if(isCreating) {
-    submitButton.textContent = "Creating...";
-  } else {
-    submitButton.textContent = "Create";
-  }
-}
-
-const deleting = (isDeleting) => {
-  if(isDeleting) {
-    submitButton.textContent = "Deleting...";
-  } else {
-    submitButton.textContent = "Deleted!";
-  }
-}
 
 // delete a card
 const deleteCardModal = new PopupWithForm({
@@ -46,7 +23,7 @@ const imageOpenModal = new PopupWithImage(popupConfig.expandImageModal);
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-5",
   headers: {
-    authorization: "a0a03679-4255-43a8-85cb-b4bca24b592e",
+    authorization: projectId,
     "Content-Type": "application/json"
   }
 });
@@ -67,9 +44,10 @@ api.getAppInfo()
     const addCardModal = new PopupWithForm({
       popupSelector: popupConfig.addCardFormModal,
       handleFormSubmit: (data) => {
-        creating(true);
+        submitCard.textContent = "Creating...";
         api.addCard(data)
           .then(data => {
+            submitCard.textContent = "Create";
             //instance of card
             addingCardToPage(data);
             addCardModal.close();
@@ -89,15 +67,12 @@ api.getAppInfo()
         handleDeleteClick: (cardId) => {
           //open form to ask user's confirmation to delete card
           deleteCardModal.open(cardId);
-          popupDeleteCard.querySelector('.form__submit').textContent = "Yes";
           //handle click on submit button
           deleteCardModal.setSubmitHandler(() => {
-            deleting(true);
             //remove the card
             api.removeCard(cardId)
               .then(() => {
                 card.deleteCard();
-                deleting(false);
                 deleteCardModal.close();
               })
               .catch(err => console.log(err));
@@ -122,7 +97,6 @@ api.getAppInfo()
       }, userData._id, cardsConfig.cardSelector);
 
       defaultCardList.addItem(card.getCardElements());
-      creating(false);
     }
 
     const profile = new UserInfo({
@@ -131,24 +105,22 @@ api.getAppInfo()
     });
     //set user infos(name and job) on profile section on page launch
     profile.setUserInfo({userName: userData.name, userDescription: userData.about});
-    console.log("name " + userData.name + " - job: " + userData.about);
 
     //edit-profile form
     const editProfileModal = new PopupWithForm({
       popupSelector: popupConfig.editFormModal,
       handleFormSubmit: (data) => {
-        console.log("1." + data.name + "-job: " + data.about);
-        loading(true);
+        submitEdit.textContent = "Saving...";
         api.setUserInfos({
           name: data.name,
           about: data.about
         })
           .then(() => {
+            submitEdit.textContent = "Save";
             profile.setUserInfo({
               userName: data.name,
               userDescription: data.about
             });
-            loading(false);
           })
           .then(() => {
             editProfileModal.close();
@@ -159,7 +131,6 @@ api.getAppInfo()
 
     // add listeners for edit-icon
     document.querySelector('.profile__edit').addEventListener('click', () => {
-      loading(false);
       editProfileModal.open();
       const userInfos = profile.getUserInfo();
       nameInput.value = userInfos.userName;
@@ -177,21 +148,21 @@ api.getAppInfo()
 const editAvatar = new PopupWithForm({
   popupSelector: popupConfig.editAvatarModal,
   handleFormSubmit: (data) => {
+    submitAvatar.textContent = "Saving...";
     api.setUserAvatar({
       avatar: data.link
     })
       .then(() => {
+        submitAvatar.textContent = "Save";
         avatarImage.src = data.link;
         editAvatar.close();
       })
       .catch(err => console.log(err));
-    loading(true);
   }
 });
 
 // event listeners to open avatar changing modal
 avatarEditButton.addEventListener('click', () => {
-  loading(false);
   avatarPicInput.value = avatarImage.src;
   editAvatar.open();
 });

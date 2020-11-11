@@ -12,7 +12,6 @@ export default class Api {
    * Loading Cards from the Server
    * GET https://around.nomoreparties.co/v1/groupId/cards
    */
-  //
   getInitialCards() {
     return fetch(this._baseUrl + '/cards', {
       headers: this._headers

@@ -5,8 +5,8 @@ import latemarImage from "../images/element_latemar.png";
 import vanoiseParkImage from "../images/element_vanoise.png";
 import lagoDiBraiesImage from "../images/element_lago-di-braies.png";
 
+export const projectId = "a0a03679-4255-43a8-85cb-b4bca24b592e";
 
-//initial values of cards in gallery
 export const initialCards = [
   { name: "Yosemite Valley", link: yosemiteImage },
   { name: "Lake Louise", link: lakeLouiseImage },
@@ -43,15 +43,18 @@ export const cardsConfig = {
   cardSelector: '.element'
 };
 
-export const likeButton = document.querySelector('.element__like');
-export const submitButton = document.querySelector('.form__submit');
+export const popupAddCard = document.querySelector('.popup_type_add-card');
+export const popupEditAvatar = document.querySelector('.popup_type_edit-avatar');
+export const popupEditProfile = document.querySelector('.popup_type_edit-profile');
+
+export const submitAvatar = popupEditAvatar.querySelector('.form__submit');
+export const submitCard = popupAddCard.querySelector('.form__submit');
+export const submitEdit = popupEditProfile.querySelector('.form__submit');
+
+export const avatarEditButton = document.querySelector('.profile__photo_edit');
+export const avatarImage = document.querySelector('.profile__photo');
+
+export const avatarPicInput = document.querySelector('.form__input_type_avatar-url');
 export const nameInput = document.querySelector('.form__input_type_name');
 export const descriptionInput = document.querySelector('.form__input_type_description');
-export const avatarPicInput = document.querySelector('.form__input_type_avatar-url');
-
-export const popupEditAvatar = document.querySelector('.popup_type_edit-avatar');
-export const popupDeleteCard = document.querySelector('.popup_type_delete');
-
-export const avatarImage = document.querySelector('.profile__photo');
-export const avatarEditButton = document.querySelector('.profile__photo_edit');
 
