@@ -62,9 +62,11 @@ api.getAppInfo()
       const card = new Card({
         data,
         handleCardClick: () => {
+          console.log(1)
           imageOpenModal.open(data.name, data.link)
         },
         handleDeleteClick: (cardId) => {
+          console.log(2)
           //open form to ask user's confirmation to delete card
           deleteCardModal.open(cardId);
           //handle click on submit button

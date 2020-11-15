@@ -33,6 +33,13 @@ export default class Card {
     this._element.querySelector('.element__like_count').textContent = countLike;
   }
 
+  _showTrashIcon() {
+    // check that data.owner.userId = userId to handle showing delete button on card owner only
+    if(this._owner._id == this._userId) {
+      this._element.querySelector('.element__delete').classList.add('element__delete_show');
+    }
+  }
+
   deleteCard() {
     this._element.remove();
     this._element = null;
@@ -54,8 +61,9 @@ export default class Card {
     this._element.querySelector('.element__photo').alt = this._title;
     this._element.querySelector('.element__name').textContent = this._title;
 
-    this._renderLikes();
     this.likesCount(this._likes.length);
+    this._renderLikes();
+    this._showTrashIcon();
 
     this._setEventListeners();
 
