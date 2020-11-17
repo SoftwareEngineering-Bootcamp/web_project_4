@@ -35,7 +35,8 @@ export const popupConfig = {
 
 export const profileConfig = {
   profileName: 'profile__name',
-  profileDescription: 'profile__description'
+  profileDescription: 'profile__description',
+  profileAvatar: 'profile__photo'
 };
 
 export const cardsConfig = {

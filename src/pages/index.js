@@ -62,11 +62,9 @@ api.getAppInfo()
       const card = new Card({
         data,
         handleCardClick: () => {
-          console.log(1)
           imageOpenModal.open(data.name, data.link)
         },
         handleDeleteClick: (cardId) => {
-          console.log(2)
           //open form to ask user's confirmation to delete card
           deleteCardModal.open(cardId);
           //handle click on submit button
@@ -83,14 +81,16 @@ api.getAppInfo()
         handleLikeClick: (cardId) => {
           const isLiked = card._element.querySelector('.element__like').classList.contains('element__like_active');
           if(isLiked) {
-            card._element.querySelector('.element__like').classList.remove('element__like_active');
             api.removeCardLike(cardId)
-              .then(res => card.likesCount(res.likes.length))
+              .then(res => {
+                card._element.querySelector('.element__like').classList.remove('element__like_active');
+                card.likesCount(res.likes.length)
+              })
               .catch(err => console.log(err))
           } else {
-            card._element.querySelector('.element__like').classList.add('element__like_active');
             api.addCardLike(cardId)
               .then(res => {
+                card._element.querySelector('.element__like').classList.add('element__like_active');
                 return card.likesCount(res.likes.length)
               })
               .catch(err => console.log(err))
@@ -103,10 +103,15 @@ api.getAppInfo()
 
     const profile = new UserInfo({
       userNameSelector: profileConfig.profileName,
-      userDescriptionSelector: profileConfig.profileDescription
+      userDescriptionSelector: profileConfig.profileDescription,
+      userAvatarSelector: profileConfig.profileAvatar
     });
     //set user infos(name and job) on profile section on page launch
-    profile.setUserInfo({userName: userData.name, userDescription: userData.about});
+    profile.setUserInfo({
+      userName: userData.name,
+      userDescription: userData.about,
+      userAvatar: userData.avatar
+    });
 
     //edit-profile form
     const editProfileModal = new PopupWithForm({
@@ -141,7 +146,7 @@ api.getAppInfo()
     editProfileModal.setEventListeners();
 
     //retrieve user avatar
-    avatarImage.src = userData.avatar;
+    // avatarImage.src = userData.avatar;
   })
   .catch(err => console.log(err));
 

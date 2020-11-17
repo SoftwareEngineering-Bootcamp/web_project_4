@@ -35,7 +35,7 @@ export default class Card {
 
   _showTrashIcon() {
     // check that data.owner.userId = userId to handle showing delete button on card owner only
-    if(this._owner._id == this._userId) {
+    if(this._owner._id === this._userId) {
       this._element.querySelector('.element__delete').classList.add('element__delete_show');
     }
   }
@@ -56,10 +56,12 @@ export default class Card {
 
   getCardElements() {
     this._element = this._getTemplate();
+    const cardPhoto = this._element.querySelector('.element__photo');
+    const cardName = this._element.querySelector('.element__name');
 
-    this._element.querySelector('.element__photo').src = this._link;
-    this._element.querySelector('.element__photo').alt = this._title;
-    this._element.querySelector('.element__name').textContent = this._title;
+    cardPhoto.src = this._link;
+    cardPhoto.alt = this._title;
+    cardName.textContent = this._title;
 
     this.likesCount(this._likes.length);
     this._renderLikes();
