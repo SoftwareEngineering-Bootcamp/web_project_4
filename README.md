@@ -18,7 +18,9 @@
 
 ### Functionality
 
-## Project is connected to the server through request using prvate token and group id. User profile informations and avatar are loaded from the server. Make requests to server to collect all informations about a specific user: name, description, cards they added and the number of likes of each cards. Delete confirmation is requested to make sure the user approve a card's deletion, and a form is added to allow user to change the profile picture. User is prevented to delete cards they don't own. The following request where made through the project: DELETE, GET, PATCH, POST and PUT.
+## Installation of Github pages to deploy project and make it accessible to users.
+
+## Project is connected to the Yandex server through request using private token and group id. User profile informations and avatar are loaded from the server on page load. Requests are made to the server to collect all informations about a specific user: name, description, cards they added and the number of likes of each cards. The delete button is shown only on cards created by actual user and a confirmation is requested to make sure the user approve a card's deletion. User is allowed to change the profile picture my providing an url in the avatar edit modal. The following request where made through the project: DELETE, GET, PATCH, POST and PUT.
 
 **Project 9: Connect project to server**
 * Make a request to the server.
