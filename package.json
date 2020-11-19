@@ -1,4 +1,5 @@
 {
+  "homepage": "https://github.com/Abra-Sena/web_project_4#readme",
   "name": "web_project_4",
   "version": "1.0.0",
   "description": "# Project 4, 5, 6, 7 & 8 from Praticum by Yandex Web Dev course",
@@ -7,7 +8,7 @@
     "build": "rimraf dist && webpack",
     "dev": "webpack-dev-server --open --watch",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,6 @@
   "bugs": {
     "url": "https://github.com/Abra-Sena/web_project_4/issues"
   },
-  "homepage": "https://github.com/Abra-Sena/web_project_4#readme",
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
