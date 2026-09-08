@@ -1,26 +1,26 @@
 # Project Around The U.S.
-### Project 4, 5, 6, 7, 8 & 9 from Praticum by Yandex Web Dev course
+### Project 4, 5, 6, 7, 8 & 9 from the Software Engineering program with TripleTen (formerly Praticum by Yandex)
 My first project using JavaScript and Webpack. This is a project split in small parts through the course to cover different aspects of web development.
 
 <!-- * [My project is accessible here](https://abra-sena.github.io/web_project_4/) -->
 
 ## Description
-* *Adaptive design* with *Mobile first approach*.
-* Page structured with *BEM* methodology.
-* Technologies: **_HTML_**, **_CSS_** and **_JavaScript_**.
-* **Position:** _flexbox_, _grid container_, _media queries_.
-* Smooth transition for popup opening and closing.
-* Change of style on button like click.
-* Form validation and event handling.
-* Project bundling and building with **_Webpack_**.
-* Connect project to server by making **_fetch requests_** to the server.
+* **_Adaptive design_** with **_Mobile first_** approach
+* Page structured with *BEM* methodology
+* Technologies: **_HTML_**, **_CSS_** and **_JavaScript_**
+* Position: _flexbox_, _grid container_, _media queries_
+* Smooth transition for popup opening and closing
+* Change of style on like button click
+* Form validation and events handling
+* Project bundling and building with **_Webpack_**
+* Connect project to server by making **_fetch requests_** to the server
 
 ## Functionality
 
 ### Installation of Github pages to deploy project and make it accessible to users
 #### (Update 2026: GitHub page not live)
 
-Project is connected to the Yandex server through request using private token and group id. User profile informations and avatar are loaded from the server on page load. Requests are made to the server to collect all informations about a specific user: name, description, cards they added and the number of likes of each cards. The delete button is shown only on cards created by actual user and a confirmation is requested to make sure the user approve a card's deletion. User is allowed to change the profile picture my providing an url in the avatar edit modal. The following requests were allowed through the project: **_DELETE_**, **_GET_**, **_PATCH_**, **_POST_** and **_PUT_**.
+Project is connected to the Yandex server through request using private token and group id. User profile informations and avatar are loaded from the server on page load. Requests are made to the server to collect all informations about a specific user: name, description, cards they added and the number of likes of each cards. The delete button is only displayed on cards created by actual user (not the initial cards) and a confirmation is requested to make sure the user approve a card's deletion. User is allowed to change the profile picture my providing an url in the avatar edit modal. The following requests were allowed through the project: **_DELETE_**, **_GET_**, **_PATCH_**, **_POST_** and **_PUT_**.
 
 ### Project 9: Connect project to server
 * Make a request to the server
